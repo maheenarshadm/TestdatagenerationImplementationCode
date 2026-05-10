@@ -1,0 +1,3585 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions_openimis_rules_14_tables_70_rules" name="openIMIS Rules 14 Tables 70 Rules" namespace="http://example.com/openimis/dmn" camunda:historyTimeToLive="180">
+  <decision id="DT1_PolicyEligibility" name="DT1_PolicyEligibility">
+    <decisionTable id="DT1_PolicyEligibility_table" hitPolicy="FIRST">
+      <input id="DT1_PolicyEligibility_input_policyStatus" label="policyStatus">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_policyStatus" typeRef="number">
+          <text>policyStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_daysToExpiry" label="daysToExpiry">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_daysToExpiry" typeRef="number">
+          <text>daysToExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_validityTo_policy" label="validityTo_policy">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_validityTo_policy" typeRef="number">
+          <text>validityTo_policy</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_totalPremiumPaid" label="totalPremiumPaid">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_totalPremiumPaid" typeRef="number">
+          <text>totalPremiumPaid</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_activePolicyCount" label="activePolicyCount">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_activePolicyCount" typeRef="number">
+          <text>activePolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_renewalCount" label="renewalCount">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_renewalCount" typeRef="number">
+          <text>renewalCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_selfRenewed" label="selfRenewed">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_selfRenewed" typeRef="number">
+          <text>selfRenewed</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_renewalWarnings" label="renewalWarnings">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_renewalWarnings" typeRef="number">
+          <text>renewalWarnings</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_daysAfterExpiry" label="daysAfterExpiry">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_daysAfterExpiry" typeRef="number">
+          <text>daysAfterExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_unpaidPremiumCount" label="unpaidPremiumCount">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_unpaidPremiumCount" typeRef="number">
+          <text>unpaidPremiumCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_PolicyEligibility_input_expiredPolicyCount" label="expiredPolicyCount">
+        <inputExpression id="DT1_PolicyEligibility_inputExpr_expiredPolicyCount" typeRef="number">
+          <text>expiredPolicyCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT1_PolicyEligibility_output" label="policyEligibility" name="policyEligibility" typeRef="string" />
+      <rule id="pol_ACTIVE">
+        <description>pol_ACTIVE</description>
+        <inputEntry id="pol_ACTIVE_in_policyStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_daysToExpiry">
+          <text>&gt;= 90</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_validityTo_policy">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_totalPremiumPaid">
+          <text>&gt;= 1200</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_activePolicyCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_renewalCount">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_selfRenewed">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_renewalWarnings">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_daysAfterExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_unpaidPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_ACTIVE_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="pol_ACTIVE_out">
+          <text>"ACTIVE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="pol_EXPIRED">
+        <description>pol_EXPIRED</description>
+        <inputEntry id="pol_EXPIRED_in_policyStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_daysToExpiry">
+          <text>&lt; 0</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_validityTo_policy">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_totalPremiumPaid">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_renewalCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_selfRenewed">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_renewalWarnings">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_daysAfterExpiry">
+          <text>&gt;= 30</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_unpaidPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_EXPIRED_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="pol_EXPIRED_out">
+          <text>"EXPIRED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="pol_SUSPENDED">
+        <description>pol_SUSPENDED</description>
+        <inputEntry id="pol_SUSPENDED_in_policyStatus">
+          <text>16</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_daysToExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_validityTo_policy">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_totalPremiumPaid">
+          <text>&lt; 100</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_renewalCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_selfRenewed">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_renewalWarnings">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_daysAfterExpiry">
+          <text>&gt;= 10</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_unpaidPremiumCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="pol_SUSPENDED_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="pol_SUSPENDED_out">
+          <text>"SUSPENDED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="pol_IDLE">
+        <description>pol_IDLE</description>
+        <inputEntry id="pol_IDLE_in_policyStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_daysToExpiry">
+          <text>&gt;= 60</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_validityTo_policy">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_totalPremiumPaid">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_renewalCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_selfRenewed">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_renewalWarnings">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_daysAfterExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_unpaidPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_IDLE_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="pol_IDLE_out">
+          <text>"IDLE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="pol_LAPSED">
+        <description>pol_LAPSED</description>
+        <inputEntry id="pol_LAPSED_in_policyStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_daysToExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_validityTo_policy">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_totalPremiumPaid">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_renewalCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_selfRenewed">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_renewalWarnings">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_daysAfterExpiry">
+          <text>&gt;= 90</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_unpaidPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pol_LAPSED_in_expiredPolicyCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <outputEntry id="pol_LAPSED_out">
+          <text>"LAPSED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT2_ClaimAdjudication" name="DT2_ClaimAdjudication">
+    <decisionTable id="DT2_ClaimAdjudication_table" hitPolicy="FIRST">
+      <input id="DT2_ClaimAdjudication_input_claimStatus" label="claimStatus">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_claimStatus" typeRef="number">
+          <text>claimStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_totalClaimedAmount" label="totalClaimedAmount">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_totalClaimedAmount" typeRef="number">
+          <text>totalClaimedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_reviewStatus" label="reviewStatus">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_reviewStatus" typeRef="number">
+          <text>reviewStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_approvalStatus" label="approvalStatus">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_approvalStatus" typeRef="number">
+          <text>approvalStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_feedbackStatus" label="feedbackStatus">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_feedbackStatus" typeRef="number">
+          <text>feedbackStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_rejectedItemCount" label="rejectedItemCount">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_rejectedItemCount" typeRef="number">
+          <text>rejectedItemCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_claimServiceCount" label="claimServiceCount">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_claimServiceCount" typeRef="number">
+          <text>claimServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_approvedAmount" label="approvedAmount">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_approvedAmount" typeRef="number">
+          <text>approvedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_approvedServiceCount" label="approvedServiceCount">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_approvedServiceCount" typeRef="number">
+          <text>approvedServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_deductibleAmount" label="deductibleAmount">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_deductibleAmount" typeRef="number">
+          <text>deductibleAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_valuatedAmount" label="valuatedAmount">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_valuatedAmount" typeRef="number">
+          <text>valuatedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_rejectionReason" label="rejectionReason">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_rejectionReason" typeRef="number">
+          <text>rejectionReason</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_ClaimAdjudication_input_exceedCeilingAmount" label="exceedCeilingAmount">
+        <inputExpression id="DT2_ClaimAdjudication_inputExpr_exceedCeilingAmount" typeRef="number">
+          <text>exceedCeilingAmount</text>
+        </inputExpression>
+      </input>
+      <output id="DT2_ClaimAdjudication_output" label="claimAdjudication" name="claimAdjudication" typeRef="string" />
+      <rule id="claim_ENTERED">
+        <description>claim_ENTERED</description>
+        <inputEntry id="claim_ENTERED_in_claimStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_totalClaimedAmount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_reviewStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_approvalStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_feedbackStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_valuatedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_ENTERED_in_exceedCeilingAmount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="claim_ENTERED_out">
+          <text>"ENTERED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="claim_CHECKED">
+        <description>claim_CHECKED</description>
+        <inputEntry id="claim_CHECKED_in_claimStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_totalClaimedAmount">
+          <text>&gt;= 200</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_reviewStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_approvalStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_rejectedItemCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_claimServiceCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_valuatedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_CHECKED_in_exceedCeilingAmount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="claim_CHECKED_out">
+          <text>"CHECKED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="claim_PROCESSED">
+        <description>claim_PROCESSED</description>
+        <inputEntry id="claim_PROCESSED_in_claimStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_totalClaimedAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_reviewStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_approvalStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_rejectedItemCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_approvedAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_approvedServiceCount">
+          <text>&gt;= 4</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_deductibleAmount">
+          <text>&lt;= 30</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_valuatedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_PROCESSED_in_exceedCeilingAmount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="claim_PROCESSED_out">
+          <text>"PROCESSED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="claim_VALUATED">
+        <description>claim_VALUATED</description>
+        <inputEntry id="claim_VALUATED_in_claimStatus">
+          <text>16</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_totalClaimedAmount">
+          <text>&gt;= 800</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_reviewStatus">
+          <text>8</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_approvalStatus">
+          <text>8</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_rejectedItemCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_approvedServiceCount">
+          <text>&gt;= 4</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_deductibleAmount">
+          <text>&lt;= 30</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_valuatedAmount">
+          <text>&gt;= 800</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_VALUATED_in_exceedCeilingAmount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="claim_VALUATED_out">
+          <text>"VALUATED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="claim_REJECTED">
+        <description>claim_REJECTED</description>
+        <inputEntry id="claim_REJECTED_in_claimStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_totalClaimedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_reviewStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_approvalStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_feedbackStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_rejectedItemCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_approvedAmount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_valuatedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_rejectionReason">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="claim_REJECTED_in_exceedCeilingAmount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="claim_REJECTED_out">
+          <text>"REJECTED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="claim_OVER_CEILING">
+        <description>claim_OVER_CEILING</description>
+        <inputEntry id="claim_OVER_CEILING_in_claimStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_totalClaimedAmount">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_reviewStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_approvalStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_approvedServiceCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_deductibleAmount">
+          <text>&lt;= 100</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_valuatedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="claim_OVER_CEILING_in_exceedCeilingAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <outputEntry id="claim_OVER_CEILING_out">
+          <text>"OVER_CEILING"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT3_PremiumStatus" name="DT3_PremiumStatus">
+    <decisionTable id="DT3_PremiumStatus_table" hitPolicy="FIRST">
+      <input id="DT3_PremiumStatus_input_payType" label="payType">
+        <inputExpression id="DT3_PremiumStatus_inputExpr_payType" typeRef="number">
+          <text>payType</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_PremiumStatus_input_premiumAmount" label="premiumAmount">
+        <inputExpression id="DT3_PremiumStatus_inputExpr_premiumAmount" typeRef="number">
+          <text>premiumAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_PremiumStatus_input_isPhotoFee" label="isPhotoFee">
+        <inputExpression id="DT3_PremiumStatus_inputExpr_isPhotoFee" typeRef="number">
+          <text>isPhotoFee</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_PremiumStatus_input_validityTo_premium" label="validityTo_premium">
+        <inputExpression id="DT3_PremiumStatus_inputExpr_validityTo_premium" typeRef="number">
+          <text>validityTo_premium</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_PremiumStatus_input_totalPremiumCount" label="totalPremiumCount">
+        <inputExpression id="DT3_PremiumStatus_inputExpr_totalPremiumCount" typeRef="number">
+          <text>totalPremiumCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_PremiumStatus_input_unpaidPremiumCount" label="unpaidPremiumCount">
+        <inputExpression id="DT3_PremiumStatus_inputExpr_unpaidPremiumCount" typeRef="number">
+          <text>unpaidPremiumCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_PremiumStatus_input_totalPremiumPaid" label="totalPremiumPaid">
+        <inputExpression id="DT3_PremiumStatus_inputExpr_totalPremiumPaid" typeRef="number">
+          <text>totalPremiumPaid</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_PremiumStatus_input_policyStatus" label="policyStatus">
+        <inputExpression id="DT3_PremiumStatus_inputExpr_policyStatus" typeRef="number">
+          <text>policyStatus</text>
+        </inputExpression>
+      </input>
+      <output id="DT3_PremiumStatus_output" label="premiumStatus" name="premiumStatus" typeRef="string" />
+      <rule id="prem_PAID_CASH">
+        <description>prem_PAID_CASH</description>
+        <inputEntry id="prem_PAID_CASH_in_payType">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_CASH_in_premiumAmount">
+          <text>&gt;= 800</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_CASH_in_isPhotoFee">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_CASH_in_validityTo_premium">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_CASH_in_totalPremiumCount">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_CASH_in_unpaidPremiumCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_CASH_in_totalPremiumPaid">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_CASH_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="prem_PAID_CASH_out">
+          <text>"PAID_CASH"</text>
+        </outputEntry>
+      </rule>
+      <rule id="prem_PAID_BANK">
+        <description>prem_PAID_BANK</description>
+        <inputEntry id="prem_PAID_BANK_in_payType">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_BANK_in_premiumAmount">
+          <text>&gt;= 800</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_BANK_in_isPhotoFee">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_BANK_in_validityTo_premium">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_BANK_in_totalPremiumCount">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_BANK_in_unpaidPremiumCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_BANK_in_totalPremiumPaid">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prem_PAID_BANK_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="prem_PAID_BANK_out">
+          <text>"PAID_BANK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="prem_PHOTO_FEE">
+        <description>prem_PHOTO_FEE</description>
+        <inputEntry id="prem_PHOTO_FEE_in_payType">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="prem_PHOTO_FEE_in_premiumAmount">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="prem_PHOTO_FEE_in_isPhotoFee">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="prem_PHOTO_FEE_in_validityTo_premium">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_PHOTO_FEE_in_totalPremiumCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="prem_PHOTO_FEE_in_unpaidPremiumCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_PHOTO_FEE_in_totalPremiumPaid">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prem_PHOTO_FEE_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="prem_PHOTO_FEE_out">
+          <text>"PHOTO_FEE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="prem_MOBILE_PAID">
+        <description>prem_MOBILE_PAID</description>
+        <inputEntry id="prem_MOBILE_PAID_in_payType">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="prem_MOBILE_PAID_in_premiumAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="prem_MOBILE_PAID_in_isPhotoFee">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_MOBILE_PAID_in_validityTo_premium">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_MOBILE_PAID_in_totalPremiumCount">
+          <text>&gt;= 6</text>
+        </inputEntry>
+        <inputEntry id="prem_MOBILE_PAID_in_unpaidPremiumCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_MOBILE_PAID_in_totalPremiumPaid">
+          <text>&gt;= 1500</text>
+        </inputEntry>
+        <inputEntry id="prem_MOBILE_PAID_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="prem_MOBILE_PAID_out">
+          <text>"MOBILE_PAID"</text>
+        </outputEntry>
+      </rule>
+      <rule id="prem_INSUFFICIENT">
+        <description>prem_INSUFFICIENT</description>
+        <inputEntry id="prem_INSUFFICIENT_in_payType">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prem_INSUFFICIENT_in_premiumAmount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="prem_INSUFFICIENT_in_isPhotoFee">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prem_INSUFFICIENT_in_validityTo_premium">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prem_INSUFFICIENT_in_totalPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prem_INSUFFICIENT_in_unpaidPremiumCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="prem_INSUFFICIENT_in_totalPremiumPaid">
+          <text>&lt; 200</text>
+        </inputEntry>
+        <inputEntry id="prem_INSUFFICIENT_in_policyStatus">
+          <text>2</text>
+        </inputEntry>
+        <outputEntry id="prem_INSUFFICIENT_out">
+          <text>"INSUFFICIENT"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT4_EnrolmentStatus" name="DT4_EnrolmentStatus">
+    <decisionTable id="DT4_EnrolmentStatus_table" hitPolicy="FIRST">
+      <input id="DT4_EnrolmentStatus_input_isHead" label="isHead">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_isHead" typeRef="number">
+          <text>isHead</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_cardIssued" label="cardIssued">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_cardIssued" typeRef="number">
+          <text>cardIssued</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_validityTo_insuree" label="validityTo_insuree">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_validityTo_insuree" typeRef="number">
+          <text>validityTo_insuree</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_activePolicyCount" label="activePolicyCount">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_activePolicyCount" typeRef="number">
+          <text>activePolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_totalPremiumPaid" label="totalPremiumPaid">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_totalPremiumPaid" typeRef="number">
+          <text>totalPremiumPaid</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_vulnerability" label="vulnerability">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_vulnerability" typeRef="number">
+          <text>vulnerability</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_poverty" label="poverty">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_poverty" typeRef="number">
+          <text>poverty</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_familyMemberCount" label="familyMemberCount">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_familyMemberCount" typeRef="number">
+          <text>familyMemberCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_expiredPolicyCount" label="expiredPolicyCount">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_expiredPolicyCount" typeRef="number">
+          <text>expiredPolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_daysAfterExpiry" label="daysAfterExpiry">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_daysAfterExpiry" typeRef="number">
+          <text>daysAfterExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_EnrolmentStatus_input_renewalCount" label="renewalCount">
+        <inputExpression id="DT4_EnrolmentStatus_inputExpr_renewalCount" typeRef="number">
+          <text>renewalCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT4_EnrolmentStatus_output" label="enrolmentStatus" name="enrolmentStatus" typeRef="string" />
+      <rule id="enrol_HEAD_ACTIVE">
+        <description>enrol_HEAD_ACTIVE</description>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_isHead">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_cardIssued">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_validityTo_insuree">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_activePolicyCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_totalPremiumPaid">
+          <text>&gt;= 1000</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_vulnerability">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_poverty">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_familyMemberCount">
+          <text>&gt;= 4</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_expiredPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_daysAfterExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_HEAD_ACTIVE_in_renewalCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="enrol_HEAD_ACTIVE_out">
+          <text>"HEAD_ACTIVE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="enrol_MEMBER_ACTIVE">
+        <description>enrol_MEMBER_ACTIVE</description>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_isHead">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_cardIssued">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_validityTo_insuree">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_activePolicyCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_totalPremiumPaid">
+          <text>&gt;= 800</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_vulnerability">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_poverty">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_familyMemberCount">
+          <text>&gt;= 6</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_expiredPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_daysAfterExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_MEMBER_ACTIVE_in_renewalCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="enrol_MEMBER_ACTIVE_out">
+          <text>"MEMBER_ACTIVE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="enrol_UNINSURED">
+        <description>enrol_UNINSURED</description>
+        <inputEntry id="enrol_UNINSURED_in_isHead">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_cardIssued">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_validityTo_insuree">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_activePolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_totalPremiumPaid">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_vulnerability">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_poverty">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_familyMemberCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_expiredPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_daysAfterExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_UNINSURED_in_renewalCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="enrol_UNINSURED_out">
+          <text>"UNINSURED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="enrol_VULNERABLE">
+        <description>enrol_VULNERABLE</description>
+        <inputEntry id="enrol_VULNERABLE_in_isHead">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_cardIssued">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_validityTo_insuree">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_activePolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_totalPremiumPaid">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_vulnerability">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_poverty">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_familyMemberCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_daysAfterExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_VULNERABLE_in_renewalCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="enrol_VULNERABLE_out">
+          <text>"VULNERABLE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="enrol_EXPIRED_MEMBER">
+        <description>enrol_EXPIRED_MEMBER</description>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_isHead">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_cardIssued">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_validityTo_insuree">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_activePolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_totalPremiumPaid">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_vulnerability">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_poverty">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_familyMemberCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_expiredPolicyCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_daysAfterExpiry">
+          <text>&gt;= 60</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_MEMBER_in_renewalCount">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="enrol_EXPIRED_MEMBER_out">
+          <text>"EXPIRED_MEMBER"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT5_HFAssessment" name="DT5_HFAssessment">
+    <decisionTable id="DT5_HFAssessment_table" hitPolicy="FIRST">
+      <input id="DT5_HFAssessment_input_visitType" label="visitType">
+        <inputExpression id="DT5_HFAssessment_inputExpr_visitType" typeRef="number">
+          <text>visitType</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_HFAssessment_input_hfLevel" label="hfLevel">
+        <inputExpression id="DT5_HFAssessment_inputExpr_hfLevel" typeRef="number">
+          <text>hfLevel</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_HFAssessment_input_claimServiceCount" label="claimServiceCount">
+        <inputExpression id="DT5_HFAssessment_inputExpr_claimServiceCount" typeRef="number">
+          <text>claimServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_HFAssessment_input_feedbackStatus" label="feedbackStatus">
+        <inputExpression id="DT5_HFAssessment_inputExpr_feedbackStatus" typeRef="number">
+          <text>feedbackStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_HFAssessment_input_totalClaimedAmount" label="totalClaimedAmount">
+        <inputExpression id="DT5_HFAssessment_inputExpr_totalClaimedAmount" typeRef="number">
+          <text>totalClaimedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_HFAssessment_input_claimStatus" label="claimStatus">
+        <inputExpression id="DT5_HFAssessment_inputExpr_claimStatus" typeRef="number">
+          <text>claimStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_HFAssessment_input_daysBetweenDateFromTo" label="daysBetweenDateFromTo">
+        <inputExpression id="DT5_HFAssessment_inputExpr_daysBetweenDateFromTo" typeRef="number">
+          <text>daysBetweenDateFromTo</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_HFAssessment_input_reviewStatus" label="reviewStatus">
+        <inputExpression id="DT5_HFAssessment_inputExpr_reviewStatus" typeRef="number">
+          <text>reviewStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_HFAssessment_input_approvedAmount" label="approvedAmount">
+        <inputExpression id="DT5_HFAssessment_inputExpr_approvedAmount" typeRef="number">
+          <text>approvedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_HFAssessment_input_rejectedItemCount" label="rejectedItemCount">
+        <inputExpression id="DT5_HFAssessment_inputExpr_rejectedItemCount" typeRef="number">
+          <text>rejectedItemCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT5_HFAssessment_output" label="hFAssessment" name="hFAssessment" typeRef="string" />
+      <rule id="hf_OUTPATIENT_OK">
+        <description>hf_OUTPATIENT_OK</description>
+        <inputEntry id="hf_OUTPATIENT_OK_in_visitType">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="hf_OUTPATIENT_OK_in_hfLevel">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="hf_OUTPATIENT_OK_in_claimServiceCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="hf_OUTPATIENT_OK_in_feedbackStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="hf_OUTPATIENT_OK_in_totalClaimedAmount">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <inputEntry id="hf_OUTPATIENT_OK_in_claimStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="hf_OUTPATIENT_OK_in_daysBetweenDateFromTo">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_OUTPATIENT_OK_in_reviewStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_OUTPATIENT_OK_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_OUTPATIENT_OK_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="hf_OUTPATIENT_OK_out">
+          <text>"OUTPATIENT_OK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="hf_INPATIENT_OK">
+        <description>hf_INPATIENT_OK</description>
+        <inputEntry id="hf_INPATIENT_OK_in_visitType">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="hf_INPATIENT_OK_in_hfLevel">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="hf_INPATIENT_OK_in_claimServiceCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="hf_INPATIENT_OK_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_INPATIENT_OK_in_totalClaimedAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="hf_INPATIENT_OK_in_claimStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="hf_INPATIENT_OK_in_daysBetweenDateFromTo">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="hf_INPATIENT_OK_in_reviewStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_INPATIENT_OK_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_INPATIENT_OK_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="hf_INPATIENT_OK_out">
+          <text>"INPATIENT_OK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="hf_EMERGENCY_OK">
+        <description>hf_EMERGENCY_OK</description>
+        <inputEntry id="hf_EMERGENCY_OK_in_visitType">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="hf_EMERGENCY_OK_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_EMERGENCY_OK_in_claimServiceCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="hf_EMERGENCY_OK_in_feedbackStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="hf_EMERGENCY_OK_in_totalClaimedAmount">
+          <text>&gt;= 200</text>
+        </inputEntry>
+        <inputEntry id="hf_EMERGENCY_OK_in_claimStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="hf_EMERGENCY_OK_in_daysBetweenDateFromTo">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="hf_EMERGENCY_OK_in_reviewStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_EMERGENCY_OK_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_EMERGENCY_OK_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="hf_EMERGENCY_OK_out">
+          <text>"EMERGENCY_OK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="hf_REFERRAL">
+        <description>hf_REFERRAL</description>
+        <inputEntry id="hf_REFERRAL_in_visitType">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="hf_REFERRAL_in_hfLevel">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="hf_REFERRAL_in_claimServiceCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="hf_REFERRAL_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_REFERRAL_in_totalClaimedAmount">
+          <text>&gt;= 1000</text>
+        </inputEntry>
+        <inputEntry id="hf_REFERRAL_in_claimStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="hf_REFERRAL_in_daysBetweenDateFromTo">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="hf_REFERRAL_in_reviewStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_REFERRAL_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_REFERRAL_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="hf_REFERRAL_out">
+          <text>"REFERRAL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="hf_FEEDBACK_NEEDED">
+        <description>hf_FEEDBACK_NEEDED</description>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_visitType">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_feedbackStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_totalClaimedAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_claimStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_daysBetweenDateFromTo">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_reviewStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_approvedAmount">
+          <text>&gt;= 200</text>
+        </inputEntry>
+        <inputEntry id="hf_FEEDBACK_NEEDED_in_rejectedItemCount">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="hf_FEEDBACK_NEEDED_out">
+          <text>"FEEDBACK_NEEDED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT6_RenewalDecision" name="DT6_RenewalDecision">
+    <decisionTable id="DT6_RenewalDecision_table" hitPolicy="FIRST">
+      <input id="DT6_RenewalDecision_input_policyStatus" label="policyStatus">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_policyStatus" typeRef="number">
+          <text>policyStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_RenewalDecision_input_daysToExpiry" label="daysToExpiry">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_daysToExpiry" typeRef="number">
+          <text>daysToExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_RenewalDecision_input_totalPremiumPaid" label="totalPremiumPaid">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_totalPremiumPaid" typeRef="number">
+          <text>totalPremiumPaid</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_RenewalDecision_input_renewalWarnings" label="renewalWarnings">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_renewalWarnings" typeRef="number">
+          <text>renewalWarnings</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_RenewalDecision_input_renewalCount" label="renewalCount">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_renewalCount" typeRef="number">
+          <text>renewalCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_RenewalDecision_input_selfRenewed" label="selfRenewed">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_selfRenewed" typeRef="number">
+          <text>selfRenewed</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_RenewalDecision_input_activePolicyCount" label="activePolicyCount">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_activePolicyCount" typeRef="number">
+          <text>activePolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_RenewalDecision_input_daysAfterExpiry" label="daysAfterExpiry">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_daysAfterExpiry" typeRef="number">
+          <text>daysAfterExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_RenewalDecision_input_unpaidPremiumCount" label="unpaidPremiumCount">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_unpaidPremiumCount" typeRef="number">
+          <text>unpaidPremiumCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_RenewalDecision_input_validityTo_policy" label="validityTo_policy">
+        <inputExpression id="DT6_RenewalDecision_inputExpr_validityTo_policy" typeRef="number">
+          <text>validityTo_policy</text>
+        </inputExpression>
+      </input>
+      <output id="DT6_RenewalDecision_output" label="renewalDecision" name="renewalDecision" typeRef="string" />
+      <rule id="renew_ELIGIBLE">
+        <description>renew_ELIGIBLE</description>
+        <inputEntry id="renew_ELIGIBLE_in_policyStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="renew_ELIGIBLE_in_daysToExpiry">
+          <text>&gt;= 0</text>
+        </inputEntry>
+        <inputEntry id="renew_ELIGIBLE_in_totalPremiumPaid">
+          <text>&gt;= 1500</text>
+        </inputEntry>
+        <inputEntry id="renew_ELIGIBLE_in_renewalWarnings">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="renew_ELIGIBLE_in_renewalCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="renew_ELIGIBLE_in_selfRenewed">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="renew_ELIGIBLE_in_activePolicyCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="renew_ELIGIBLE_in_daysAfterExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_ELIGIBLE_in_unpaidPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_ELIGIBLE_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="renew_ELIGIBLE_out">
+          <text>"ELIGIBLE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="renew_GRACE">
+        <description>renew_GRACE</description>
+        <inputEntry id="renew_GRACE_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_GRACE_in_daysToExpiry">
+          <text>&lt; 0</text>
+        </inputEntry>
+        <inputEntry id="renew_GRACE_in_totalPremiumPaid">
+          <text>&gt;= 200</text>
+        </inputEntry>
+        <inputEntry id="renew_GRACE_in_renewalWarnings">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="renew_GRACE_in_renewalCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="renew_GRACE_in_selfRenewed">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_GRACE_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_GRACE_in_daysAfterExpiry">
+          <text>&lt;= 30</text>
+        </inputEntry>
+        <inputEntry id="renew_GRACE_in_unpaidPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_GRACE_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="renew_GRACE_out">
+          <text>"GRACE_PERIOD"</text>
+        </outputEntry>
+      </rule>
+      <rule id="renew_DISCOUNT">
+        <description>renew_DISCOUNT</description>
+        <inputEntry id="renew_DISCOUNT_in_policyStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="renew_DISCOUNT_in_daysToExpiry">
+          <text>&lt;= 45</text>
+        </inputEntry>
+        <inputEntry id="renew_DISCOUNT_in_totalPremiumPaid">
+          <text>&gt;= 1000</text>
+        </inputEntry>
+        <inputEntry id="renew_DISCOUNT_in_renewalWarnings">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="renew_DISCOUNT_in_renewalCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="renew_DISCOUNT_in_selfRenewed">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_DISCOUNT_in_activePolicyCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="renew_DISCOUNT_in_daysAfterExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_DISCOUNT_in_unpaidPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_DISCOUNT_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="renew_DISCOUNT_out">
+          <text>"DISCOUNT_ELIGIBLE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="renew_BLOCKED">
+        <description>renew_BLOCKED</description>
+        <inputEntry id="renew_BLOCKED_in_policyStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="renew_BLOCKED_in_daysToExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_BLOCKED_in_totalPremiumPaid">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_BLOCKED_in_renewalWarnings">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="renew_BLOCKED_in_renewalCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="renew_BLOCKED_in_selfRenewed">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="renew_BLOCKED_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_BLOCKED_in_daysAfterExpiry">
+          <text>&gt;= 90</text>
+        </inputEntry>
+        <inputEntry id="renew_BLOCKED_in_unpaidPremiumCount">
+          <text>&gt;= 4</text>
+        </inputEntry>
+        <inputEntry id="renew_BLOCKED_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="renew_BLOCKED_out">
+          <text>"BLOCKED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="renew_SELF_RENEWED">
+        <description>renew_SELF_RENEWED</description>
+        <inputEntry id="renew_SELF_RENEWED_in_policyStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="renew_SELF_RENEWED_in_daysToExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_SELF_RENEWED_in_totalPremiumPaid">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="renew_SELF_RENEWED_in_renewalWarnings">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="renew_SELF_RENEWED_in_renewalCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="renew_SELF_RENEWED_in_selfRenewed">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="renew_SELF_RENEWED_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_SELF_RENEWED_in_daysAfterExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_SELF_RENEWED_in_unpaidPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="renew_SELF_RENEWED_in_validityTo_policy">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="renew_SELF_RENEWED_out">
+          <text>"SELF_RENEWED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT7_FraudDetection" name="DT7_FraudDetection">
+    <decisionTable id="DT7_FraudDetection_table" hitPolicy="FIRST">
+      <input id="DT7_FraudDetection_input_claimCountSameDay" label="claimCountSameDay">
+        <inputExpression id="DT7_FraudDetection_inputExpr_claimCountSameDay" typeRef="number">
+          <text>claimCountSameDay</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_visitType" label="visitType">
+        <inputExpression id="DT7_FraudDetection_inputExpr_visitType" typeRef="number">
+          <text>visitType</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_totalClaimedAmount" label="totalClaimedAmount">
+        <inputExpression id="DT7_FraudDetection_inputExpr_totalClaimedAmount" typeRef="number">
+          <text>totalClaimedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_claimStatus" label="claimStatus">
+        <inputExpression id="DT7_FraudDetection_inputExpr_claimStatus" typeRef="number">
+          <text>claimStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_claimServiceCount" label="claimServiceCount">
+        <inputExpression id="DT7_FraudDetection_inputExpr_claimServiceCount" typeRef="number">
+          <text>claimServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_reviewStatus" label="reviewStatus">
+        <inputExpression id="DT7_FraudDetection_inputExpr_reviewStatus" typeRef="number">
+          <text>reviewStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_priceAskedVsApprovedRatio" label="priceAskedVsApprovedRatio">
+        <inputExpression id="DT7_FraudDetection_inputExpr_priceAskedVsApprovedRatio" typeRef="number">
+          <text>priceAskedVsApprovedRatio</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_feedbackStatus" label="feedbackStatus">
+        <inputExpression id="DT7_FraudDetection_inputExpr_feedbackStatus" typeRef="number">
+          <text>feedbackStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_rejectedItemCount" label="rejectedItemCount">
+        <inputExpression id="DT7_FraudDetection_inputExpr_rejectedItemCount" typeRef="number">
+          <text>rejectedItemCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_cardIssued" label="cardIssued">
+        <inputExpression id="DT7_FraudDetection_inputExpr_cardIssued" typeRef="number">
+          <text>cardIssued</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_activePolicyCount" label="activePolicyCount">
+        <inputExpression id="DT7_FraudDetection_inputExpr_activePolicyCount" typeRef="number">
+          <text>activePolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_expiredPolicyCount" label="expiredPolicyCount">
+        <inputExpression id="DT7_FraudDetection_inputExpr_expiredPolicyCount" typeRef="number">
+          <text>expiredPolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_approvedAmount" label="approvedAmount">
+        <inputExpression id="DT7_FraudDetection_inputExpr_approvedAmount" typeRef="number">
+          <text>approvedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_claimCountThisMonth" label="claimCountThisMonth">
+        <inputExpression id="DT7_FraudDetection_inputExpr_claimCountThisMonth" typeRef="number">
+          <text>claimCountThisMonth</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_hfLevel" label="hfLevel">
+        <inputExpression id="DT7_FraudDetection_inputExpr_hfLevel" typeRef="number">
+          <text>hfLevel</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudDetection_input_approvedServiceCount" label="approvedServiceCount">
+        <inputExpression id="DT7_FraudDetection_inputExpr_approvedServiceCount" typeRef="number">
+          <text>approvedServiceCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT7_FraudDetection_output" label="fraudDetection" name="fraudDetection" typeRef="string" />
+      <rule id="fraud_DUPLICATE">
+        <description>fraud_DUPLICATE</description>
+        <inputEntry id="fraud_DUPLICATE_in_claimCountSameDay">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_visitType">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_totalClaimedAmount">
+          <text>&gt;= 1000</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_claimStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_claimServiceCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_reviewStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_priceAskedVsApprovedRatio">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_cardIssued">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_claimCountThisMonth">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_DUPLICATE_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="fraud_DUPLICATE_out">
+          <text>"DUPLICATE_CLAIM"</text>
+        </outputEntry>
+      </rule>
+      <rule id="fraud_OVERCHARGE">
+        <description>fraud_OVERCHARGE</description>
+        <inputEntry id="fraud_OVERCHARGE_in_claimCountSameDay">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_visitType">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_totalClaimedAmount">
+          <text>&gt;= 2000</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_claimStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_claimServiceCount">
+          <text>&gt;= 4</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_reviewStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_priceAskedVsApprovedRatio">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_feedbackStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_rejectedItemCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_cardIssued">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_claimCountThisMonth">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_OVERCHARGE_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="fraud_OVERCHARGE_out">
+          <text>"OVERCHARGE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="fraud_GHOST">
+        <description>fraud_GHOST</description>
+        <inputEntry id="fraud_GHOST_in_claimCountSameDay">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_visitType">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_totalClaimedAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_claimStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_claimServiceCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_reviewStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_priceAskedVsApprovedRatio">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_cardIssued">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_activePolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_expiredPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_claimCountThisMonth">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_GHOST_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="fraud_GHOST_out">
+          <text>"GHOST_PATIENT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="fraud_PHANTOM">
+        <description>fraud_PHANTOM</description>
+        <inputEntry id="fraud_PHANTOM_in_claimCountSameDay">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_visitType">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_totalClaimedAmount">
+          <text>&gt;= 3000</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_claimStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_claimServiceCount">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_reviewStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_priceAskedVsApprovedRatio">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_feedbackStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_rejectedItemCount">
+          <text>&gt;= 4</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_cardIssued">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_approvedAmount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_claimCountThisMonth">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PHANTOM_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="fraud_PHANTOM_out">
+          <text>"PHANTOM_SERVICE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="fraud_HIGH_FREQ">
+        <description>fraud_HIGH_FREQ</description>
+        <inputEntry id="fraud_HIGH_FREQ_in_claimCountSameDay">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_visitType">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_totalClaimedAmount">
+          <text>&gt;= 1500</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_claimStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_reviewStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_priceAskedVsApprovedRatio">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_feedbackStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_cardIssued">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_claimCountThisMonth">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_hfLevel">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_FREQ_in_approvedServiceCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <outputEntry id="fraud_HIGH_FREQ_out">
+          <text>"HIGH_FREQUENCY"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT8_ContribCollection" name="DT8_ContribCollection">
+    <decisionTable id="DT8_ContribCollection_table" hitPolicy="FIRST">
+      <input id="DT8_ContribCollection_input_paymentStatus" label="paymentStatus">
+        <inputExpression id="DT8_ContribCollection_inputExpr_paymentStatus" typeRef="number">
+          <text>paymentStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ContribCollection_input_receivedAmount" label="receivedAmount">
+        <inputExpression id="DT8_ContribCollection_inputExpr_receivedAmount" typeRef="number">
+          <text>receivedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ContribCollection_input_matchedPremiumCount" label="matchedPremiumCount">
+        <inputExpression id="DT8_ContribCollection_inputExpr_matchedPremiumCount" typeRef="number">
+          <text>matchedPremiumCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ContribCollection_input_validityTo_payment" label="validityTo_payment">
+        <inputExpression id="DT8_ContribCollection_inputExpr_validityTo_payment" typeRef="number">
+          <text>validityTo_payment</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ContribCollection_input_rejectedPaymentCount" label="rejectedPaymentCount">
+        <inputExpression id="DT8_ContribCollection_inputExpr_rejectedPaymentCount" typeRef="number">
+          <text>rejectedPaymentCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ContribCollection_input_overpaidAmount" label="overpaidAmount">
+        <inputExpression id="DT8_ContribCollection_inputExpr_overpaidAmount" typeRef="number">
+          <text>overpaidAmount</text>
+        </inputExpression>
+      </input>
+      <output id="DT8_ContribCollection_output" label="contribCollection" name="contribCollection" typeRef="string" />
+      <rule id="contrib_MATCHED">
+        <description>contrib_MATCHED</description>
+        <inputEntry id="contrib_MATCHED_in_paymentStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="contrib_MATCHED_in_receivedAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="contrib_MATCHED_in_matchedPremiumCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="contrib_MATCHED_in_validityTo_payment">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="contrib_MATCHED_in_rejectedPaymentCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="contrib_MATCHED_in_overpaidAmount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="contrib_MATCHED_out">
+          <text>"MATCHED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="contrib_PARTIAL">
+        <description>contrib_PARTIAL</description>
+        <inputEntry id="contrib_PARTIAL_in_paymentStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="contrib_PARTIAL_in_receivedAmount">
+          <text>&lt; 400</text>
+        </inputEntry>
+        <inputEntry id="contrib_PARTIAL_in_matchedPremiumCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="contrib_PARTIAL_in_validityTo_payment">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="contrib_PARTIAL_in_rejectedPaymentCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="contrib_PARTIAL_in_overpaidAmount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="contrib_PARTIAL_out">
+          <text>"PARTIAL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="contrib_UNMATCHED">
+        <description>contrib_UNMATCHED</description>
+        <inputEntry id="contrib_UNMATCHED_in_paymentStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="contrib_UNMATCHED_in_receivedAmount">
+          <text>&gt;= 200</text>
+        </inputEntry>
+        <inputEntry id="contrib_UNMATCHED_in_matchedPremiumCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="contrib_UNMATCHED_in_validityTo_payment">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="contrib_UNMATCHED_in_rejectedPaymentCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="contrib_UNMATCHED_in_overpaidAmount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="contrib_UNMATCHED_out">
+          <text>"UNMATCHED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="contrib_REJECTED">
+        <description>contrib_REJECTED</description>
+        <inputEntry id="contrib_REJECTED_in_paymentStatus">
+          <text>8</text>
+        </inputEntry>
+        <inputEntry id="contrib_REJECTED_in_receivedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="contrib_REJECTED_in_matchedPremiumCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="contrib_REJECTED_in_validityTo_payment">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="contrib_REJECTED_in_rejectedPaymentCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="contrib_REJECTED_in_overpaidAmount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="contrib_REJECTED_out">
+          <text>"REJECTED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="contrib_OVERPAID">
+        <description>contrib_OVERPAID</description>
+        <inputEntry id="contrib_OVERPAID_in_paymentStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="contrib_OVERPAID_in_receivedAmount">
+          <text>&gt;= 800</text>
+        </inputEntry>
+        <inputEntry id="contrib_OVERPAID_in_matchedPremiumCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="contrib_OVERPAID_in_validityTo_payment">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="contrib_OVERPAID_in_rejectedPaymentCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="contrib_OVERPAID_in_overpaidAmount">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <outputEntry id="contrib_OVERPAID_out">
+          <text>"OVERPAID"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT9_OfficerPerformance" name="DT9_OfficerPerformance">
+    <decisionTable id="DT9_OfficerPerformance_table" hitPolicy="FIRST">
+      <input id="DT9_OfficerPerformance_input_enrolledFamilyCount" label="enrolledFamilyCount">
+        <inputExpression id="DT9_OfficerPerformance_inputExpr_enrolledFamilyCount" typeRef="number">
+          <text>enrolledFamilyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_OfficerPerformance_input_collectedPremiumAmount" label="collectedPremiumAmount">
+        <inputExpression id="DT9_OfficerPerformance_inputExpr_collectedPremiumAmount" typeRef="number">
+          <text>collectedPremiumAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_OfficerPerformance_input_expiredPolicyCount" label="expiredPolicyCount">
+        <inputExpression id="DT9_OfficerPerformance_inputExpr_expiredPolicyCount" typeRef="number">
+          <text>expiredPolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_OfficerPerformance_input_validityTo_officer" label="validityTo_officer">
+        <inputExpression id="DT9_OfficerPerformance_inputExpr_validityTo_officer" typeRef="number">
+          <text>validityTo_officer</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_OfficerPerformance_input_renewedPolicyCount" label="renewedPolicyCount">
+        <inputExpression id="DT9_OfficerPerformance_inputExpr_renewedPolicyCount" typeRef="number">
+          <text>renewedPolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_OfficerPerformance_input_activePolicyCount_officer" label="activePolicyCount_officer">
+        <inputExpression id="DT9_OfficerPerformance_inputExpr_activePolicyCount_officer" typeRef="number">
+          <text>activePolicyCount_officer</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_OfficerPerformance_input_renewalWarnings" label="renewalWarnings">
+        <inputExpression id="DT9_OfficerPerformance_inputExpr_renewalWarnings" typeRef="number">
+          <text>renewalWarnings</text>
+        </inputExpression>
+      </input>
+      <output id="DT9_OfficerPerformance_output" label="officerPerformance" name="officerPerformance" typeRef="string" />
+      <rule id="officer_HIGH">
+        <description>officer_HIGH</description>
+        <inputEntry id="officer_HIGH_in_enrolledFamilyCount">
+          <text>&gt;= 110</text>
+        </inputEntry>
+        <inputEntry id="officer_HIGH_in_collectedPremiumAmount">
+          <text>&gt;= 25000</text>
+        </inputEntry>
+        <inputEntry id="officer_HIGH_in_expiredPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_HIGH_in_validityTo_officer">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_HIGH_in_renewedPolicyCount">
+          <text>&gt;= 12</text>
+        </inputEntry>
+        <inputEntry id="officer_HIGH_in_activePolicyCount_officer">
+          <text>&gt;= 85</text>
+        </inputEntry>
+        <inputEntry id="officer_HIGH_in_renewalWarnings">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="officer_HIGH_out">
+          <text>"HIGH_PERFORMER"</text>
+        </outputEntry>
+      </rule>
+      <rule id="officer_MED">
+        <description>officer_MED</description>
+        <inputEntry id="officer_MED_in_enrolledFamilyCount">
+          <text>&lt; 80</text>
+        </inputEntry>
+        <inputEntry id="officer_MED_in_collectedPremiumAmount">
+          <text>&gt;= 12000</text>
+        </inputEntry>
+        <inputEntry id="officer_MED_in_expiredPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_MED_in_validityTo_officer">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_MED_in_renewedPolicyCount">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <inputEntry id="officer_MED_in_activePolicyCount_officer">
+          <text>&gt;= 40</text>
+        </inputEntry>
+        <inputEntry id="officer_MED_in_renewalWarnings">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="officer_MED_out">
+          <text>"MED_PERFORMER"</text>
+        </outputEntry>
+      </rule>
+      <rule id="officer_LOW">
+        <description>officer_LOW</description>
+        <inputEntry id="officer_LOW_in_enrolledFamilyCount">
+          <text>&lt; 10</text>
+        </inputEntry>
+        <inputEntry id="officer_LOW_in_collectedPremiumAmount">
+          <text>&lt; 500</text>
+        </inputEntry>
+        <inputEntry id="officer_LOW_in_expiredPolicyCount">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <inputEntry id="officer_LOW_in_validityTo_officer">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_LOW_in_renewedPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_LOW_in_activePolicyCount_officer">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_LOW_in_renewalWarnings">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <outputEntry id="officer_LOW_out">
+          <text>"LOW_PERFORMER"</text>
+        </outputEntry>
+      </rule>
+      <rule id="officer_INACTIVE">
+        <description>officer_INACTIVE</description>
+        <inputEntry id="officer_INACTIVE_in_enrolledFamilyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_INACTIVE_in_collectedPremiumAmount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_INACTIVE_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="officer_INACTIVE_in_validityTo_officer">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_INACTIVE_in_renewedPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_INACTIVE_in_activePolicyCount_officer">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_INACTIVE_in_renewalWarnings">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="officer_INACTIVE_out">
+          <text>"INACTIVE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="officer_OUTSTANDING">
+        <description>officer_OUTSTANDING</description>
+        <inputEntry id="officer_OUTSTANDING_in_enrolledFamilyCount">
+          <text>&gt;= 150</text>
+        </inputEntry>
+        <inputEntry id="officer_OUTSTANDING_in_collectedPremiumAmount">
+          <text>&gt;= 35000</text>
+        </inputEntry>
+        <inputEntry id="officer_OUTSTANDING_in_expiredPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_OUTSTANDING_in_validityTo_officer">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="officer_OUTSTANDING_in_renewedPolicyCount">
+          <text>&gt;= 20</text>
+        </inputEntry>
+        <inputEntry id="officer_OUTSTANDING_in_activePolicyCount_officer">
+          <text>&gt;= 120</text>
+        </inputEntry>
+        <inputEntry id="officer_OUTSTANDING_in_renewalWarnings">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="officer_OUTSTANDING_out">
+          <text>"OUTSTANDING"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT10_ProductCoverage" name="DT10_ProductCoverage">
+    <decisionTable id="DT10_ProductCoverage_table" hitPolicy="FIRST">
+      <input id="DT10_ProductCoverage_input_maxPolicyValue" label="maxPolicyValue">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_maxPolicyValue" typeRef="number">
+          <text>maxPolicyValue</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_coveredServiceCount" label="coveredServiceCount">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_coveredServiceCount" typeRef="number">
+          <text>coveredServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_coveredItemCount" label="coveredItemCount">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_coveredItemCount" typeRef="number">
+          <text>coveredItemCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_waitingPeriod" label="waitingPeriod">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_waitingPeriod" typeRef="number">
+          <text>waitingPeriod</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_insurancePeriod" label="insurancePeriod">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_insurancePeriod" typeRef="number">
+          <text>insurancePeriod</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_validityTo_product" label="validityTo_product">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_validityTo_product" typeRef="number">
+          <text>validityTo_product</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_totalClaimedAmount" label="totalClaimedAmount">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_totalClaimedAmount" typeRef="number">
+          <text>totalClaimedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_exceedCeilingAmount" label="exceedCeilingAmount">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_exceedCeilingAmount" typeRef="number">
+          <text>exceedCeilingAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_claimStatus" label="claimStatus">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_claimStatus" typeRef="number">
+          <text>claimStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_approvedServiceCount" label="approvedServiceCount">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_approvedServiceCount" typeRef="number">
+          <text>approvedServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_approvedAmount" label="approvedAmount">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_approvedAmount" typeRef="number">
+          <text>approvedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_deductibleAmount" label="deductibleAmount">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_deductibleAmount" typeRef="number">
+          <text>deductibleAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_feedbackStatus" label="feedbackStatus">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_feedbackStatus" typeRef="number">
+          <text>feedbackStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_daysSinceEnrolment" label="daysSinceEnrolment">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_daysSinceEnrolment" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_policyStatus" label="policyStatus">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_policyStatus" typeRef="number">
+          <text>policyStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_validityTo_policy" label="validityTo_policy">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_validityTo_policy" typeRef="number">
+          <text>validityTo_policy</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_daysProductExpired" label="daysProductExpired">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_daysProductExpired" typeRef="number">
+          <text>daysProductExpired</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ProductCoverage_input_activePolicyCount" label="activePolicyCount">
+        <inputExpression id="DT10_ProductCoverage_inputExpr_activePolicyCount" typeRef="number">
+          <text>activePolicyCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT10_ProductCoverage_output" label="productCoverage" name="productCoverage" typeRef="string" />
+      <rule id="prod_FULL_COVER">
+        <description>prod_FULL_COVER</description>
+        <inputEntry id="prod_FULL_COVER_in_maxPolicyValue">
+          <text>&gt;= 7000</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_coveredServiceCount">
+          <text>&gt;= 12</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_coveredItemCount">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_waitingPeriod">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_insurancePeriod">
+          <text>&gt;= 12</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_validityTo_product">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_totalClaimedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_exceedCeilingAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_claimStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_daysSinceEnrolment">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_daysProductExpired">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_FULL_COVER_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="prod_FULL_COVER_out">
+          <text>"FULL_COVERAGE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="prod_BASIC_COVER">
+        <description>prod_BASIC_COVER</description>
+        <inputEntry id="prod_BASIC_COVER_in_maxPolicyValue">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_coveredServiceCount">
+          <text>&gt;= 6</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_coveredItemCount">
+          <text>&gt;= 4</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_waitingPeriod">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_insurancePeriod">
+          <text>&gt;= 9</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_validityTo_product">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_totalClaimedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_exceedCeilingAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_claimStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_daysSinceEnrolment">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_daysProductExpired">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_BASIC_COVER_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="prod_BASIC_COVER_out">
+          <text>"BASIC_COVERAGE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="prod_CEILING_BREACH">
+        <description>prod_CEILING_BREACH</description>
+        <inputEntry id="prod_CEILING_BREACH_in_maxPolicyValue">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_coveredServiceCount">
+          <text>&gt;= 12</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_coveredItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_waitingPeriod">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_insurancePeriod">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_validityTo_product">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_totalClaimedAmount">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_exceedCeilingAmount">
+          <text>&gt;= 600</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_claimStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_approvedServiceCount">
+          <text>&gt;= 6</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_approvedAmount">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_deductibleAmount">
+          <text>&lt;= 50</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_feedbackStatus">
+          <text>8</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_daysSinceEnrolment">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_daysProductExpired">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_CEILING_BREACH_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="prod_CEILING_BREACH_out">
+          <text>"CEILING_BREACH"</text>
+        </outputEntry>
+      </rule>
+      <rule id="prod_WAITPERIOD">
+        <description>prod_WAITPERIOD</description>
+        <inputEntry id="prod_WAITPERIOD_in_maxPolicyValue">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_coveredServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_coveredItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_waitingPeriod">
+          <text>&gt;= 90</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_insurancePeriod">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_validityTo_product">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_totalClaimedAmount">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_exceedCeilingAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_claimStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_daysSinceEnrolment">
+          <text>&lt; 90</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_policyStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_validityTo_policy">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_daysProductExpired">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_WAITPERIOD_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="prod_WAITPERIOD_out">
+          <text>"WAITING_PERIOD"</text>
+        </outputEntry>
+      </rule>
+      <rule id="prod_EXPIRED_PROD">
+        <description>prod_EXPIRED_PROD</description>
+        <inputEntry id="prod_EXPIRED_PROD_in_maxPolicyValue">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_coveredServiceCount">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_coveredItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_waitingPeriod">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_insurancePeriod">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_validityTo_product">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_totalClaimedAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_exceedCeilingAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_claimStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_daysSinceEnrolment">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_policyStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_validityTo_policy">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_daysProductExpired">
+          <text>&gt;= 90</text>
+        </inputEntry>
+        <inputEntry id="prod_EXPIRED_PROD_in_activePolicyCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <outputEntry id="prod_EXPIRED_PROD_out">
+          <text>"PRODUCT_EXPIRED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT11_SubsidyAssessment" name="DT11_SubsidyAssessment">
+    <decisionTable id="DT11_SubsidyAssessment_table" hitPolicy="FIRST">
+      <input id="DT11_SubsidyAssessment_input_poverty" label="poverty">
+        <inputExpression id="DT11_SubsidyAssessment_inputExpr_poverty" typeRef="number">
+          <text>poverty</text>
+        </inputExpression>
+      </input>
+      <input id="DT11_SubsidyAssessment_input_vulnerability" label="vulnerability">
+        <inputExpression id="DT11_SubsidyAssessment_inputExpr_vulnerability" typeRef="number">
+          <text>vulnerability</text>
+        </inputExpression>
+      </input>
+      <input id="DT11_SubsidyAssessment_input_activePolicyCount" label="activePolicyCount">
+        <inputExpression id="DT11_SubsidyAssessment_inputExpr_activePolicyCount" typeRef="number">
+          <text>activePolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT11_SubsidyAssessment_input_familyMemberCount" label="familyMemberCount">
+        <inputExpression id="DT11_SubsidyAssessment_inputExpr_familyMemberCount" typeRef="number">
+          <text>familyMemberCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT11_SubsidyAssessment_input_totalPremiumPaid" label="totalPremiumPaid">
+        <inputExpression id="DT11_SubsidyAssessment_inputExpr_totalPremiumPaid" typeRef="number">
+          <text>totalPremiumPaid</text>
+        </inputExpression>
+      </input>
+      <input id="DT11_SubsidyAssessment_input_daysToExpiry" label="daysToExpiry">
+        <inputExpression id="DT11_SubsidyAssessment_inputExpr_daysToExpiry" typeRef="number">
+          <text>daysToExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT11_SubsidyAssessment_input_cardIssued" label="cardIssued">
+        <inputExpression id="DT11_SubsidyAssessment_inputExpr_cardIssued" typeRef="number">
+          <text>cardIssued</text>
+        </inputExpression>
+      </input>
+      <input id="DT11_SubsidyAssessment_input_expiredPolicyCount" label="expiredPolicyCount">
+        <inputExpression id="DT11_SubsidyAssessment_inputExpr_expiredPolicyCount" typeRef="number">
+          <text>expiredPolicyCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT11_SubsidyAssessment_output" label="subsidyAssessment" name="subsidyAssessment" typeRef="string" />
+      <rule id="subsidy_FULL">
+        <description>subsidy_FULL</description>
+        <inputEntry id="subsidy_FULL_in_poverty">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_FULL_in_vulnerability">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_FULL_in_activePolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="subsidy_FULL_in_familyMemberCount">
+          <text>&gt;= 4</text>
+        </inputEntry>
+        <inputEntry id="subsidy_FULL_in_totalPremiumPaid">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="subsidy_FULL_in_daysToExpiry">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_FULL_in_cardIssued">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="subsidy_FULL_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="subsidy_FULL_out">
+          <text>"FULL_SUBSIDY"</text>
+        </outputEntry>
+      </rule>
+      <rule id="subsidy_PARTIAL">
+        <description>subsidy_PARTIAL</description>
+        <inputEntry id="subsidy_PARTIAL_in_poverty">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_PARTIAL_in_vulnerability">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="subsidy_PARTIAL_in_activePolicyCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_PARTIAL_in_familyMemberCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="subsidy_PARTIAL_in_totalPremiumPaid">
+          <text>&lt; 300</text>
+        </inputEntry>
+        <inputEntry id="subsidy_PARTIAL_in_daysToExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="subsidy_PARTIAL_in_cardIssued">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_PARTIAL_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="subsidy_PARTIAL_out">
+          <text>"PARTIAL_SUBSIDY"</text>
+        </outputEntry>
+      </rule>
+      <rule id="subsidy_INELIGIBLE">
+        <description>subsidy_INELIGIBLE</description>
+        <inputEntry id="subsidy_INELIGIBLE_in_poverty">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="subsidy_INELIGIBLE_in_vulnerability">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="subsidy_INELIGIBLE_in_activePolicyCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="subsidy_INELIGIBLE_in_familyMemberCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="subsidy_INELIGIBLE_in_totalPremiumPaid">
+          <text>&gt;= 1500</text>
+        </inputEntry>
+        <inputEntry id="subsidy_INELIGIBLE_in_daysToExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="subsidy_INELIGIBLE_in_cardIssued">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_INELIGIBLE_in_expiredPolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="subsidy_INELIGIBLE_out">
+          <text>"INELIGIBLE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="subsidy_REVIEW">
+        <description>subsidy_REVIEW</description>
+        <inputEntry id="subsidy_REVIEW_in_poverty">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_REVIEW_in_vulnerability">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="subsidy_REVIEW_in_activePolicyCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_REVIEW_in_familyMemberCount">
+          <text>&gt;= 4</text>
+        </inputEntry>
+        <inputEntry id="subsidy_REVIEW_in_totalPremiumPaid">
+          <text>&lt;= 250</text>
+        </inputEntry>
+        <inputEntry id="subsidy_REVIEW_in_daysToExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="subsidy_REVIEW_in_cardIssued">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_REVIEW_in_expiredPolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="subsidy_REVIEW_out">
+          <text>"UNDER_REVIEW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="subsidy_CRITICAL">
+        <description>subsidy_CRITICAL</description>
+        <inputEntry id="subsidy_CRITICAL_in_poverty">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_CRITICAL_in_vulnerability">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_CRITICAL_in_activePolicyCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="subsidy_CRITICAL_in_familyMemberCount">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="subsidy_CRITICAL_in_totalPremiumPaid">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="subsidy_CRITICAL_in_daysToExpiry">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="subsidy_CRITICAL_in_cardIssued">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="subsidy_CRITICAL_in_expiredPolicyCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <outputEntry id="subsidy_CRITICAL_out">
+          <text>"CRITICAL_NEED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT12_ClaimAudit" name="DT12_ClaimAudit">
+    <decisionTable id="DT12_ClaimAudit_table" hitPolicy="FIRST">
+      <input id="DT12_ClaimAudit_input_reviewStatus" label="reviewStatus">
+        <inputExpression id="DT12_ClaimAudit_inputExpr_reviewStatus" typeRef="number">
+          <text>reviewStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT12_ClaimAudit_input_approvalStatus" label="approvalStatus">
+        <inputExpression id="DT12_ClaimAudit_inputExpr_approvalStatus" typeRef="number">
+          <text>approvalStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT12_ClaimAudit_input_feedbackStatus" label="feedbackStatus">
+        <inputExpression id="DT12_ClaimAudit_inputExpr_feedbackStatus" typeRef="number">
+          <text>feedbackStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT12_ClaimAudit_input_rejectedItemCount" label="rejectedItemCount">
+        <inputExpression id="DT12_ClaimAudit_inputExpr_rejectedItemCount" typeRef="number">
+          <text>rejectedItemCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT12_ClaimAudit_input_approvedServiceCount" label="approvedServiceCount">
+        <inputExpression id="DT12_ClaimAudit_inputExpr_approvedServiceCount" typeRef="number">
+          <text>approvedServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT12_ClaimAudit_input_approvedAmount" label="approvedAmount">
+        <inputExpression id="DT12_ClaimAudit_inputExpr_approvedAmount" typeRef="number">
+          <text>approvedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT12_ClaimAudit_input_claimStatus" label="claimStatus">
+        <inputExpression id="DT12_ClaimAudit_inputExpr_claimStatus" typeRef="number">
+          <text>claimStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT12_ClaimAudit_input_totalClaimedAmount" label="totalClaimedAmount">
+        <inputExpression id="DT12_ClaimAudit_inputExpr_totalClaimedAmount" typeRef="number">
+          <text>totalClaimedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT12_ClaimAudit_input_rejectionReason" label="rejectionReason">
+        <inputExpression id="DT12_ClaimAudit_inputExpr_rejectionReason" typeRef="number">
+          <text>rejectionReason</text>
+        </inputExpression>
+      </input>
+      <output id="DT12_ClaimAudit_output" label="claimAudit" name="claimAudit" typeRef="string" />
+      <rule id="audit_APPROVED">
+        <description>audit_APPROVED</description>
+        <inputEntry id="audit_APPROVED_in_reviewStatus">
+          <text>8</text>
+        </inputEntry>
+        <inputEntry id="audit_APPROVED_in_approvalStatus">
+          <text>8</text>
+        </inputEntry>
+        <inputEntry id="audit_APPROVED_in_feedbackStatus">
+          <text>8</text>
+        </inputEntry>
+        <inputEntry id="audit_APPROVED_in_rejectedItemCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="audit_APPROVED_in_approvedServiceCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="audit_APPROVED_in_approvedAmount">
+          <text>&gt;= 200</text>
+        </inputEntry>
+        <inputEntry id="audit_APPROVED_in_claimStatus">
+          <text>16</text>
+        </inputEntry>
+        <inputEntry id="audit_APPROVED_in_totalClaimedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="audit_APPROVED_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="audit_APPROVED_out">
+          <text>"AUDIT_APPROVED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="audit_PARTIAL">
+        <description>audit_PARTIAL</description>
+        <inputEntry id="audit_PARTIAL_in_reviewStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="audit_PARTIAL_in_approvalStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="audit_PARTIAL_in_feedbackStatus">
+          <text>&lt;= 4</text>
+        </inputEntry>
+        <inputEntry id="audit_PARTIAL_in_rejectedItemCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="audit_PARTIAL_in_approvedServiceCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="audit_PARTIAL_in_approvedAmount">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <inputEntry id="audit_PARTIAL_in_claimStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="audit_PARTIAL_in_totalClaimedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="audit_PARTIAL_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="audit_PARTIAL_out">
+          <text>"PARTIAL_APPROVE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="audit_SEND_BACK">
+        <description>audit_SEND_BACK</description>
+        <inputEntry id="audit_SEND_BACK_in_reviewStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="audit_SEND_BACK_in_approvalStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="audit_SEND_BACK_in_feedbackStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="audit_SEND_BACK_in_rejectedItemCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="audit_SEND_BACK_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="audit_SEND_BACK_in_approvedAmount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="audit_SEND_BACK_in_claimStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="audit_SEND_BACK_in_totalClaimedAmount">
+          <text>&gt;= 300</text>
+        </inputEntry>
+        <inputEntry id="audit_SEND_BACK_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="audit_SEND_BACK_out">
+          <text>"SENT_BACK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="audit_FULL_REJECT">
+        <description>audit_FULL_REJECT</description>
+        <inputEntry id="audit_FULL_REJECT_in_reviewStatus">
+          <text>16</text>
+        </inputEntry>
+        <inputEntry id="audit_FULL_REJECT_in_approvalStatus">
+          <text>16</text>
+        </inputEntry>
+        <inputEntry id="audit_FULL_REJECT_in_feedbackStatus">
+          <text>8</text>
+        </inputEntry>
+        <inputEntry id="audit_FULL_REJECT_in_rejectedItemCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="audit_FULL_REJECT_in_approvedServiceCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="audit_FULL_REJECT_in_approvedAmount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="audit_FULL_REJECT_in_claimStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="audit_FULL_REJECT_in_totalClaimedAmount">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="audit_FULL_REJECT_in_rejectionReason">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <outputEntry id="audit_FULL_REJECT_out">
+          <text>"FULL_REJECT"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT13_CapitationPayment" name="DT13_CapitationPayment">
+    <decisionTable id="DT13_CapitationPayment_table" hitPolicy="FIRST">
+      <input id="DT13_CapitationPayment_input_capitationStatus" label="capitationStatus">
+        <inputExpression id="DT13_CapitationPayment_inputExpr_capitationStatus" typeRef="number">
+          <text>capitationStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT13_CapitationPayment_input_enrolledInsureeCount" label="enrolledInsureeCount">
+        <inputExpression id="DT13_CapitationPayment_inputExpr_enrolledInsureeCount" typeRef="number">
+          <text>enrolledInsureeCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT13_CapitationPayment_input_capitationAmount" label="capitationAmount">
+        <inputExpression id="DT13_CapitationPayment_inputExpr_capitationAmount" typeRef="number">
+          <text>capitationAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT13_CapitationPayment_input_validityTo_capitation" label="validityTo_capitation">
+        <inputExpression id="DT13_CapitationPayment_inputExpr_validityTo_capitation" typeRef="number">
+          <text>validityTo_capitation</text>
+        </inputExpression>
+      </input>
+      <input id="DT13_CapitationPayment_input_paymentStatus" label="paymentStatus">
+        <inputExpression id="DT13_CapitationPayment_inputExpr_paymentStatus" typeRef="number">
+          <text>paymentStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT13_CapitationPayment_input_activePolicyCount" label="activePolicyCount">
+        <inputExpression id="DT13_CapitationPayment_inputExpr_activePolicyCount" typeRef="number">
+          <text>activePolicyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT13_CapitationPayment_input_hfLevel" label="hfLevel">
+        <inputExpression id="DT13_CapitationPayment_inputExpr_hfLevel" typeRef="number">
+          <text>hfLevel</text>
+        </inputExpression>
+      </input>
+      <input id="DT13_CapitationPayment_input_matchedPremiumCount" label="matchedPremiumCount">
+        <inputExpression id="DT13_CapitationPayment_inputExpr_matchedPremiumCount" typeRef="number">
+          <text>matchedPremiumCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT13_CapitationPayment_input_rejectedPaymentCount" label="rejectedPaymentCount">
+        <inputExpression id="DT13_CapitationPayment_inputExpr_rejectedPaymentCount" typeRef="number">
+          <text>rejectedPaymentCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT13_CapitationPayment_output" label="capitationPayment" name="capitationPayment" typeRef="string" />
+      <rule id="capitation_READY">
+        <description>capitation_READY</description>
+        <inputEntry id="capitation_READY_in_capitationStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="capitation_READY_in_enrolledInsureeCount">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <inputEntry id="capitation_READY_in_capitationAmount">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="capitation_READY_in_validityTo_capitation">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="capitation_READY_in_paymentStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="capitation_READY_in_activePolicyCount">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="capitation_READY_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_READY_in_matchedPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_READY_in_rejectedPaymentCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="capitation_READY_out">
+          <text>"READY_FOR_PAYMENT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="capitation_PENDING_VALIDATION">
+        <description>capitation_PENDING_VALIDATION</description>
+        <inputEntry id="capitation_PENDING_VALIDATION_in_capitationStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="capitation_PENDING_VALIDATION_in_enrolledInsureeCount">
+          <text>&lt; 100</text>
+        </inputEntry>
+        <inputEntry id="capitation_PENDING_VALIDATION_in_capitationAmount">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="capitation_PENDING_VALIDATION_in_validityTo_capitation">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="capitation_PENDING_VALIDATION_in_paymentStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="capitation_PENDING_VALIDATION_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_PENDING_VALIDATION_in_hfLevel">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="capitation_PENDING_VALIDATION_in_matchedPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_PENDING_VALIDATION_in_rejectedPaymentCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="capitation_PENDING_VALIDATION_out">
+          <text>"PENDING_VALIDATION"</text>
+        </outputEntry>
+      </rule>
+      <rule id="capitation_HELD_LOW_ENROLLMENT">
+        <description>capitation_HELD_LOW_ENROLLMENT</description>
+        <inputEntry id="capitation_HELD_LOW_ENROLLMENT_in_capitationStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="capitation_HELD_LOW_ENROLLMENT_in_enrolledInsureeCount">
+          <text>&lt; 25</text>
+        </inputEntry>
+        <inputEntry id="capitation_HELD_LOW_ENROLLMENT_in_capitationAmount">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="capitation_HELD_LOW_ENROLLMENT_in_validityTo_capitation">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="capitation_HELD_LOW_ENROLLMENT_in_paymentStatus">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="capitation_HELD_LOW_ENROLLMENT_in_activePolicyCount">
+          <text>&lt; 10</text>
+        </inputEntry>
+        <inputEntry id="capitation_HELD_LOW_ENROLLMENT_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_HELD_LOW_ENROLLMENT_in_matchedPremiumCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_HELD_LOW_ENROLLMENT_in_rejectedPaymentCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="capitation_HELD_LOW_ENROLLMENT_out">
+          <text>"HELD_LOW_ENROLLMENT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="capitation_PAID">
+        <description>capitation_PAID</description>
+        <inputEntry id="capitation_PAID_in_capitationStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="capitation_PAID_in_enrolledInsureeCount">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="capitation_PAID_in_capitationAmount">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="capitation_PAID_in_validityTo_capitation">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="capitation_PAID_in_paymentStatus">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="capitation_PAID_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_PAID_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_PAID_in_matchedPremiumCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="capitation_PAID_in_rejectedPaymentCount">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="capitation_PAID_out">
+          <text>"PAID"</text>
+        </outputEntry>
+      </rule>
+      <rule id="capitation_REJECTED">
+        <description>capitation_REJECTED</description>
+        <inputEntry id="capitation_REJECTED_in_capitationStatus">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <inputEntry id="capitation_REJECTED_in_enrolledInsureeCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_REJECTED_in_capitationAmount">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="capitation_REJECTED_in_validityTo_capitation">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="capitation_REJECTED_in_paymentStatus">
+          <text>8</text>
+        </inputEntry>
+        <inputEntry id="capitation_REJECTED_in_activePolicyCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_REJECTED_in_hfLevel">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="capitation_REJECTED_in_matchedPremiumCount">
+          <text>&lt; 1</text>
+        </inputEntry>
+        <inputEntry id="capitation_REJECTED_in_rejectedPaymentCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <outputEntry id="capitation_REJECTED_out">
+          <text>"REJECTED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT14_MedicalItemServiceValidation" name="DT14_MedicalItemServiceValidation">
+    <decisionTable id="DT14_MedicalItemServiceValidation_table" hitPolicy="FIRST">
+      <input id="DT14_MedicalItemServiceValidation_input_itemServiceStatus" label="itemServiceStatus">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_itemServiceStatus" typeRef="number">
+          <text>itemServiceStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_validityTo_medical" label="validityTo_medical">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_validityTo_medical" typeRef="number">
+          <text>validityTo_medical</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_approvedServiceCount" label="approvedServiceCount">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_approvedServiceCount" typeRef="number">
+          <text>approvedServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_rejectedItemCount" label="rejectedItemCount">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_rejectedItemCount" typeRef="number">
+          <text>rejectedItemCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_approvedAmount" label="approvedAmount">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_approvedAmount" typeRef="number">
+          <text>approvedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_deductibleAmount" label="deductibleAmount">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_deductibleAmount" typeRef="number">
+          <text>deductibleAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_priceAskedVsApprovedRatio" label="priceAskedVsApprovedRatio">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_priceAskedVsApprovedRatio" typeRef="number">
+          <text>priceAskedVsApprovedRatio</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_totalClaimedAmount" label="totalClaimedAmount">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_totalClaimedAmount" typeRef="number">
+          <text>totalClaimedAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_claimServiceCount" label="claimServiceCount">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_claimServiceCount" typeRef="number">
+          <text>claimServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_feedbackStatus" label="feedbackStatus">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_feedbackStatus" typeRef="number">
+          <text>feedbackStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_coveredServiceCount" label="coveredServiceCount">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_coveredServiceCount" typeRef="number">
+          <text>coveredServiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_coveredItemCount" label="coveredItemCount">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_coveredItemCount" typeRef="number">
+          <text>coveredItemCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_policyStatus" label="policyStatus">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_policyStatus" typeRef="number">
+          <text>policyStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_validityTo_product" label="validityTo_product">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_validityTo_product" typeRef="number">
+          <text>validityTo_product</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_waitingPeriod" label="waitingPeriod">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_waitingPeriod" typeRef="number">
+          <text>waitingPeriod</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_daysSinceEnrolment" label="daysSinceEnrolment">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_daysSinceEnrolment" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_validityTo_policy" label="validityTo_policy">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_validityTo_policy" typeRef="number">
+          <text>validityTo_policy</text>
+        </inputExpression>
+      </input>
+      <input id="DT14_MedicalItemServiceValidation_input_rejectionReason" label="rejectionReason">
+        <inputExpression id="DT14_MedicalItemServiceValidation_inputExpr_rejectionReason" typeRef="number">
+          <text>rejectionReason</text>
+        </inputExpression>
+      </input>
+      <output id="DT14_MedicalItemServiceValidation_output" label="medicalItemServiceValidation" name="medicalItemServiceValidation" typeRef="string" />
+      <rule id="medical_APPROVED">
+        <description>medical_APPROVED</description>
+        <inputEntry id="medical_APPROVED_in_itemServiceStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_validityTo_medical">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_approvedServiceCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_rejectedItemCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_approvedAmount">
+          <text>&gt;= 200</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_deductibleAmount">
+          <text>&lt;= 50</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_priceAskedVsApprovedRatio">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_totalClaimedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_coveredServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_coveredItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_validityTo_product">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_waitingPeriod">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_daysSinceEnrolment">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_APPROVED_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="medical_APPROVED_out">
+          <text>"APPROVED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="medical_PRICE_REVIEW">
+        <description>medical_PRICE_REVIEW</description>
+        <inputEntry id="medical_PRICE_REVIEW_in_itemServiceStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_validityTo_medical">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_priceAskedVsApprovedRatio">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_totalClaimedAmount">
+          <text>&gt;= 1000</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_claimServiceCount">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_feedbackStatus">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_coveredServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_coveredItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_validityTo_product">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_waitingPeriod">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_daysSinceEnrolment">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_PRICE_REVIEW_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="medical_PRICE_REVIEW_out">
+          <text>"PRICE_REVIEW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="medical_NOT_COVERED">
+        <description>medical_NOT_COVERED</description>
+        <inputEntry id="medical_NOT_COVERED_in_itemServiceStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_validityTo_medical">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_rejectedItemCount">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_priceAskedVsApprovedRatio">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_totalClaimedAmount">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_coveredServiceCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_coveredItemCount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_policyStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_validityTo_product">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_waitingPeriod">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_daysSinceEnrolment">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_NOT_COVERED_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="medical_NOT_COVERED_out">
+          <text>"NOT_COVERED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="medical_WAITING_PERIOD_BLOCK">
+        <description>medical_WAITING_PERIOD_BLOCK</description>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_itemServiceStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_validityTo_medical">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_rejectedItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_approvedAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_priceAskedVsApprovedRatio">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_totalClaimedAmount">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_coveredServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_coveredItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_policyStatus">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_validityTo_product">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_waitingPeriod">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_daysSinceEnrolment">
+          <text>&lt; waitingPeriod</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_validityTo_policy">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_WAITING_PERIOD_BLOCK_in_rejectionReason">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="medical_WAITING_PERIOD_BLOCK_out">
+          <text>"WAITING_PERIOD_BLOCK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="medical_REJECTED">
+        <description>medical_REJECTED</description>
+        <inputEntry id="medical_REJECTED_in_itemServiceStatus">
+          <text>16</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_validityTo_medical">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_approvedServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_rejectedItemCount">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_approvedAmount">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_deductibleAmount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_priceAskedVsApprovedRatio">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_totalClaimedAmount">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_claimServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_feedbackStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_coveredServiceCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_coveredItemCount">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_policyStatus">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_validityTo_product">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_waitingPeriod">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_daysSinceEnrolment">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_validityTo_policy">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="medical_REJECTED_in_rejectionReason">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <outputEntry id="medical_REJECTED_out">
+          <text>"REJECTED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

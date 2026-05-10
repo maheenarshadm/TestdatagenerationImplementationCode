@@ -1,0 +1,2483 @@
+<?xml version="1.0" ?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="Definitions_jbilling_rules_extended" name="jBilling Redesigned Rules Extended" namespace="http://sarkars-workspace/dmn/jbilling-rules-extended" exporter="ChatGPT" exporterVersion="1.0">
+  <decision id="DT1_CustomerCreditRisk" name="DT1_CustomerCreditRisk">
+    <decisionTable id="DT1_CustomerCreditRisk_table" hitPolicy="FIRST">
+      <input id="DT1_CustomerCreditRisk_input_1" label="userStatusId">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_1" typeRef="number">
+          <text>userStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_2" label="balanceType">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_2" typeRef="number">
+          <text>balanceType</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_3" label="dynamicBalance">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_3" typeRef="number">
+          <text>dynamicBalance</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_4" label="overdueInvoiceCount">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_4" typeRef="number">
+          <text>overdueInvoiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_5" label="failedPaymentCount">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_5" typeRef="number">
+          <text>failedPaymentCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_6" label="autoPayment">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_6" typeRef="number">
+          <text>autoPayment</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_7" label="accountLocked">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_7" typeRef="number">
+          <text>accountLocked</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_8" label="creditLimitUtilisationPct">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_8" typeRef="number">
+          <text>creditLimitUtilisationPct</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_9" label="creditLimit">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_9" typeRef="number">
+          <text>creditLimit</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_10" label="activeOrderLineCount">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_10" typeRef="number">
+          <text>activeOrderLineCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_11" label="maxDaysPastDue">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_11" typeRef="number">
+          <text>maxDaysPastDue</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_CustomerCreditRisk_input_12" label="totalOverdueAmount">
+        <inputExpression id="DT1_CustomerCreditRisk_inputExpression_12" typeRef="number">
+          <text>totalOverdueAmount</text>
+        </inputExpression>
+      </input>
+      <output id="DT1_CustomerCreditRisk_output_1" name="creditRisk" label="creditRisk" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="credit_GOOD_STANDING">
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_2">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_3">
+          <text>&lt; creditLimit</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_6">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_7">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_GOOD_STANDING_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="credit_GOOD_STANDING_outputEntry_1">
+          <text>"GOOD_STANDING"</text>
+        </outputEntry>
+        <annotationEntry id="credit_GOOD_STANDING_annotation_1">
+          <text>Customer in good credit standing — Customer has an active account with credit balance type, dynamic balance well within limit, no overdue invoices, no failed payments this cycle, and autopay configured. Eligible for service upgrades and credit limit increases.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="credit_APPROACHING_LIMIT">
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_2">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_3">
+          <text>&gt;= 0 and &lt; creditLimit</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_8">
+          <text>&gt;= 80</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_9">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_APPROACHING_LIMIT_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="credit_APPROACHING_LIMIT_outputEntry_1">
+          <text>"APPROACHING_LIMIT"</text>
+        </outputEntry>
+        <annotationEntry id="credit_APPROACHING_LIMIT_annotation_1">
+          <text>Customer approaching credit limit — Customer is active with credit balance type but dynamic balance has consumed at least 80% of credit limit. No current overdue invoices but the trajectory warrants a soft alert before hard limit breach occurs.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="credit_LIMIT_BREACHED">
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_2">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_3">
+          <text>&gt; creditLimit</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_7">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_9">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_10">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_LIMIT_BREACHED_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="credit_LIMIT_BREACHED_outputEntry_1">
+          <text>"LIMIT_BREACHED"</text>
+        </outputEntry>
+        <annotationEntry id="credit_LIMIT_BREACHED_annotation_1">
+          <text>Credit limit exceeded — service throttling applies — Customer's dynamic balance exceeds their credit limit. Account is still active but service throttling rules apply. At least one active order line and no account lock yet — first breach response.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="credit_PREPAID_LOW">
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_2">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_3">
+          <text>[0..50[</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_10">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_PREPAID_LOW_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="credit_PREPAID_LOW_outputEntry_1">
+          <text>"PREPAID_LOW"</text>
+        </outputEntry>
+        <annotationEntry id="credit_PREPAID_LOW_annotation_1">
+          <text>Prepaid balance critically low — Prepaid customer whose balance has dropped to a critically low level. Has active order lines consuming balance, autopay is not configured to top up automatically. Service interruption imminent.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="credit_COLLECTIONS_ESCALATION">
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_1">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_2">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_4">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_7">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_11">
+          <text>&gt;= 60</text>
+        </inputEntry>
+        <inputEntry id="credit_COLLECTIONS_ESCALATION_inputEntry_12">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <outputEntry id="credit_COLLECTIONS_ESCALATION_outputEntry_1">
+          <text>"COLLECTIONS_ESCALATION"</text>
+        </outputEntry>
+        <annotationEntry id="credit_COLLECTIONS_ESCALATION_annotation_1">
+          <text>Collections escalation — multiple overdue invoices, locked account — Customer has multiple overdue invoices aged beyond 60 days, account is locked, and total overdue amount is substantial. Credit balance type with zero limit assigned. Requires collections team intervention.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT2_InvoiceSettlement" name="DT2_InvoiceSettlement">
+    <decisionTable id="DT2_InvoiceSettlement_table" hitPolicy="FIRST">
+      <input id="DT2_InvoiceSettlement_input_1" label="invoiceBalance">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_1" typeRef="number">
+          <text>invoiceBalance</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_2" label="invoiceStatusId">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_2" typeRef="number">
+          <text>invoiceStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_3" label="matchedPaymentCount">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_3" typeRef="number">
+          <text>matchedPaymentCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_4" label="isVoided">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_4" typeRef="number">
+          <text>isVoided</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_5" label="deleted">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_5" typeRef="number">
+          <text>deleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_6" label="invoiceTotal">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_6" typeRef="number">
+          <text>invoiceTotal</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_7" label="daysPastDue">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_7" typeRef="number">
+          <text>daysPastDue</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_8" label="autoPayment">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_8" typeRef="number">
+          <text>autoPayment</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_9" label="creditNoteLineCount">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_9" typeRef="number">
+          <text>creditNoteLineCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_10" label="accountLocked">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_10" typeRef="number">
+          <text>accountLocked</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_InvoiceSettlement_input_11" label="totalOverdueAmount">
+        <inputExpression id="DT2_InvoiceSettlement_inputExpression_11" typeRef="number">
+          <text>totalOverdueAmount</text>
+        </inputExpression>
+      </input>
+      <output id="DT2_InvoiceSettlement_output_1" name="settlementStatus" label="settlementStatus" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="inv_FULLY_SETTLED">
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_3">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_6">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_FULLY_SETTLED_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="inv_FULLY_SETTLED_outputEntry_1">
+          <text>"FULLY_SETTLED"</text>
+        </outputEntry>
+        <annotationEntry id="inv_FULLY_SETTLED_annotation_1">
+          <text>Invoice fully settled with matched payment — Invoice is fully paid with balance zero, has at least one matched payment record in payment_invoice, not voided or deleted, and was processed through a billing run. Clean settlement state.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="inv_PARTIAL_PAYMENT">
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_1">
+          <text>&gt; 0 and &lt; invoiceTotal</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_3">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_7">
+          <text>&lt;= 30</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_PARTIAL_PAYMENT_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="inv_PARTIAL_PAYMENT_outputEntry_1">
+          <text>"PARTIAL_PAYMENT"</text>
+        </outputEntry>
+        <annotationEntry id="inv_PARTIAL_PAYMENT_annotation_1">
+          <text>Invoice partially paid — balance remaining — Invoice has been partially paid: balance is greater than zero but less than total. At least one payment is matched. Invoice is active and within dunning grace period. Requires follow-up payment.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="inv_OVERDUE_NO_PAYMENT">
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_1">
+          <text>invoiceTotal</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_6">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_7">
+          <text>&gt; 14</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_8">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_OVERDUE_NO_PAYMENT_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="inv_OVERDUE_NO_PAYMENT_outputEntry_1">
+          <text>"OVERDUE_NO_PAYMENT"</text>
+        </outputEntry>
+        <annotationEntry id="inv_OVERDUE_NO_PAYMENT_annotation_1">
+          <text>Overdue invoice with no payment attempt — Invoice is overdue with full balance still outstanding, no payment has been matched or attempted, and the invoice has aged past the grace period. No autopay is configured. Dunning process should escalate.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="inv_DISPUTED_OVERDUE">
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_6">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_7">
+          <text>&gt; 30</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_9">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_DISPUTED_OVERDUE_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="inv_DISPUTED_OVERDUE_outputEntry_1">
+          <text>"DISPUTED_OVERDUE"</text>
+        </outputEntry>
+        <annotationEntry id="inv_DISPUTED_OVERDUE_annotation_1">
+          <text>Disputed overdue invoice — credit note pending — Invoice is overdue and has an associated credit note or adjustment line (negative invoice line count &gt; 0), suggesting a billing dispute is in progress. Balance remains outstanding but write-off is not yet appropriate.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="inv_WRITEOFF_ELIGIBLE">
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_1">
+          <text>invoiceTotal</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_7">
+          <text>&gt;= 90</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_10">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="inv_WRITEOFF_ELIGIBLE_inputEntry_11">
+          <text>&gt;= 300</text>
+        </inputEntry>
+        <outputEntry id="inv_WRITEOFF_ELIGIBLE_outputEntry_1">
+          <text>"WRITEOFF_ELIGIBLE"</text>
+        </outputEntry>
+        <annotationEntry id="inv_WRITEOFF_ELIGIBLE_annotation_1">
+          <text>Invoice eligible for write-off — Invoice is severely aged (90+ days past due), full balance outstanding, no payment ever matched, account is locked, and total overdue across all invoices is substantial. Meets criteria for bad-debt write-off.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT3_OrderBillingReadiness" name="DT3_OrderBillingReadiness">
+    <decisionTable id="DT3_OrderBillingReadiness_table" hitPolicy="FIRST">
+      <input id="DT3_OrderBillingReadiness_input_1" label="billingTypeId">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_1" typeRef="number">
+          <text>billingTypeId</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_2" label="orderStatusId">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_2" typeRef="number">
+          <text>orderStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_3" label="daysToNextBill">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_3" typeRef="number">
+          <text>daysToNextBill</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_4" label="activeOrderLineCount">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_4" typeRef="number">
+          <text>activeOrderLineCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_5" label="userStatusId">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_5" typeRef="number">
+          <text>userStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_6" label="deleted">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_6" typeRef="number">
+          <text>deleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_7" label="overdueInvoiceCount">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_7" typeRef="number">
+          <text>overdueInvoiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_8" label="dynamicBalance">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_8" typeRef="number">
+          <text>dynamicBalance</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_9" label="totalOverdueAmount">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_9" typeRef="number">
+          <text>totalOverdueAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_10" label="orderLineTotal">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_10" typeRef="number">
+          <text>orderLineTotal</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_11" label="daysToOrderExpiry">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_11" typeRef="number">
+          <text>daysToOrderExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_12" label="renewalOrderCount">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_12" typeRef="number">
+          <text>renewalOrderCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_OrderBillingReadiness_input_13" label="autoPayment">
+        <inputExpression id="DT3_OrderBillingReadiness_inputExpression_13" typeRef="number">
+          <text>autoPayment</text>
+        </inputExpression>
+      </input>
+      <output id="DT3_OrderBillingReadiness_output_1" name="billingReadiness" label="billingReadiness" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="order_READY_POSTPAID">
+        <inputEntry id="order_READY_POSTPAID_inputEntry_1">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_3">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_5">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_7">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_POSTPAID_inputEntry_13">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="order_READY_POSTPAID_outputEntry_1">
+          <text>"READY_POSTPAID"</text>
+        </outputEntry>
+        <annotationEntry id="order_READY_POSTPAID_annotation_1">
+          <text>Postpaid order ready for billing cycle — Active postpaid order with at least one active order line, billing date has passed (daysToNextBill &lt;= 0), customer account is active, and no overdue balance blocking processing. Ready to generate invoice.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="order_READY_PREPAID">
+        <inputEntry id="order_READY_PREPAID_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_3">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_8">
+          <text>&gt; orderLineTotal</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_READY_PREPAID_inputEntry_13">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="order_READY_PREPAID_outputEntry_1">
+          <text>"READY_PREPAID"</text>
+        </outputEntry>
+        <annotationEntry id="order_READY_PREPAID_annotation_1">
+          <text>Prepaid order ready — sufficient balance — Active prepaid order with billing date passed and customer has sufficient prepaid balance to cover the order line total. Autopay topped up balance. Safe to process next billing period.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="order_BLOCKED_OVERDUE">
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_3">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_7">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_9">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_BLOCKED_OVERDUE_inputEntry_13">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="order_BLOCKED_OVERDUE_outputEntry_1">
+          <text>"BLOCKED_OVERDUE"</text>
+        </outputEntry>
+        <annotationEntry id="order_BLOCKED_OVERDUE_annotation_1">
+          <text>Order blocked — customer has unresolved overdue invoices — Order is active and billing date has passed but the customer has multiple overdue invoices preventing new invoice generation. Billing system should hold the order until overdue balance is resolved.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="order_INSUFFICIENT_BALANCE">
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_3">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_8">
+          <text>&lt;= orderLineTotal</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_10">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_INSUFFICIENT_BALANCE_inputEntry_13">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="order_INSUFFICIENT_BALANCE_outputEntry_1">
+          <text>"INSUFFICIENT_BALANCE"</text>
+        </outputEntry>
+        <annotationEntry id="order_INSUFFICIENT_BALANCE_annotation_1">
+          <text>Prepaid order blocked — insufficient balance — Prepaid order billing date has arrived but customer's dynamic balance is insufficient to cover order line total. Autopay either failed or is not configured. Order is held pending top-up.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="order_EXPIRING_NO_RENEWAL">
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_11">
+          <text>[0..7]</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_12">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="order_EXPIRING_NO_RENEWAL_inputEntry_13">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="order_EXPIRING_NO_RENEWAL_outputEntry_1">
+          <text>"EXPIRING_NO_RENEWAL"</text>
+        </outputEntry>
+        <annotationEntry id="order_EXPIRING_NO_RENEWAL_annotation_1">
+          <text>Order expiring with no renewal scheduled — Active order is within 7 days of expiry, no renewal order exists (renewalOrderCount = 0), and autopay is not enabled. Customer has not initiated renewal. Service interruption risk unless action taken.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT4_PaymentProcessing" name="DT4_PaymentProcessing">
+    <decisionTable id="DT4_PaymentProcessing_table" hitPolicy="FIRST">
+      <input id="DT4_PaymentProcessing_input_1" label="resultId">
+        <inputExpression id="DT4_PaymentProcessing_inputExpression_1" typeRef="number">
+          <text>resultId</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_PaymentProcessing_input_2" label="isRefund">
+        <inputExpression id="DT4_PaymentProcessing_inputExpression_2" typeRef="number">
+          <text>isRefund</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_PaymentProcessing_input_3" label="autoPayment">
+        <inputExpression id="DT4_PaymentProcessing_inputExpression_3" typeRef="number">
+          <text>autoPayment</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_PaymentProcessing_input_4" label="invoicesClearedCount">
+        <inputExpression id="DT4_PaymentProcessing_inputExpression_4" typeRef="number">
+          <text>invoicesClearedCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_PaymentProcessing_input_5" label="deleted">
+        <inputExpression id="DT4_PaymentProcessing_inputExpression_5" typeRef="number">
+          <text>deleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_PaymentProcessing_input_6" label="paymentAmount">
+        <inputExpression id="DT4_PaymentProcessing_inputExpression_6" typeRef="number">
+          <text>paymentAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_PaymentProcessing_input_7" label="paymentAttemptCount">
+        <inputExpression id="DT4_PaymentProcessing_inputExpression_7" typeRef="number">
+          <text>paymentAttemptCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_PaymentProcessing_input_8" label="paymentMethodValid">
+        <inputExpression id="DT4_PaymentProcessing_inputExpression_8" typeRef="number">
+          <text>paymentMethodValid</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_PaymentProcessing_input_9" label="maxPaymentRetries">
+        <inputExpression id="DT4_PaymentProcessing_inputExpression_9" typeRef="number">
+          <text>maxPaymentRetries</text>
+        </inputExpression>
+      </input>
+      <output id="DT4_PaymentProcessing_output_1" name="paymentOutcome" label="paymentOutcome" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="pay_SUCCESSFUL_AUTO">
+        <inputEntry id="pay_SUCCESSFUL_AUTO_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="pay_SUCCESSFUL_AUTO_inputEntry_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_SUCCESSFUL_AUTO_inputEntry_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="pay_SUCCESSFUL_AUTO_inputEntry_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="pay_SUCCESSFUL_AUTO_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_SUCCESSFUL_AUTO_inputEntry_6">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="pay_SUCCESSFUL_AUTO_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_SUCCESSFUL_AUTO_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_SUCCESSFUL_AUTO_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="pay_SUCCESSFUL_AUTO_outputEntry_1">
+          <text>"SUCCESSFUL_AUTO"</text>
+        </outputEntry>
+        <annotationEntry id="pay_SUCCESSFUL_AUTO_annotation_1">
+          <text>Successful automatic payment — invoice cleared — Payment was processed successfully via autopay (credit card or ACH), result is successful, at least one invoice was cleared by this payment, and no refund flag. Reconciliation can proceed.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="pay_FAILED_RETRY_ELIGIBLE">
+        <inputEntry id="pay_FAILED_RETRY_ELIGIBLE_inputEntry_1">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_RETRY_ELIGIBLE_inputEntry_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_RETRY_ELIGIBLE_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_RETRY_ELIGIBLE_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_RETRY_ELIGIBLE_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_RETRY_ELIGIBLE_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_RETRY_ELIGIBLE_inputEntry_7">
+          <text>&lt; maxPaymentRetries and &gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_RETRY_ELIGIBLE_inputEntry_8">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_RETRY_ELIGIBLE_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="pay_FAILED_RETRY_ELIGIBLE_outputEntry_1">
+          <text>"FAILED_RETRY_ELIGIBLE"</text>
+        </outputEntry>
+        <annotationEntry id="pay_FAILED_RETRY_ELIGIBLE_annotation_1">
+          <text>Failed payment — within retry attempt threshold — Payment failed (result = failed or processor unavailable) but the number of attempts so far is within the configured retry limit. Payment method is still valid. System should schedule a retry.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="pay_FAILED_MAX_RETRIES">
+        <inputEntry id="pay_FAILED_MAX_RETRIES_inputEntry_1">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_MAX_RETRIES_inputEntry_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_MAX_RETRIES_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_MAX_RETRIES_inputEntry_4">
+          <text>&gt;= 0</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_MAX_RETRIES_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_MAX_RETRIES_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_MAX_RETRIES_inputEntry_7">
+          <text>&gt;= maxPaymentRetries</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_MAX_RETRIES_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_FAILED_MAX_RETRIES_inputEntry_9">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <outputEntry id="pay_FAILED_MAX_RETRIES_outputEntry_1">
+          <text>"FAILED_MAX_RETRIES"</text>
+        </outputEntry>
+        <annotationEntry id="pay_FAILED_MAX_RETRIES_annotation_1">
+          <text>Payment failed — maximum retries exhausted — Payment has failed and all configured retry attempts have been used. Payment method may be invalid or funds unavailable. Account should be flagged and dunning escalation triggered.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="pay_REFUND_ISSUED">
+        <inputEntry id="pay_REFUND_ISSUED_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="pay_REFUND_ISSUED_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="pay_REFUND_ISSUED_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_REFUND_ISSUED_inputEntry_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="pay_REFUND_ISSUED_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_REFUND_ISSUED_inputEntry_6">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="pay_REFUND_ISSUED_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_REFUND_ISSUED_inputEntry_8">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="pay_REFUND_ISSUED_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="pay_REFUND_ISSUED_outputEntry_1">
+          <text>"REFUND_ISSUED"</text>
+        </outputEntry>
+        <annotationEntry id="pay_REFUND_ISSUED_annotation_1">
+          <text>Refund successfully issued — A refund payment was processed successfully: result is successful, isRefund flag is set, refund amount is positive, and at least one original invoice is linked. Customer balance should be updated accordingly.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="pay_MANUAL_PENDING_MATCH">
+        <inputEntry id="pay_MANUAL_PENDING_MATCH_inputEntry_1">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="pay_MANUAL_PENDING_MATCH_inputEntry_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_MANUAL_PENDING_MATCH_inputEntry_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_MANUAL_PENDING_MATCH_inputEntry_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_MANUAL_PENDING_MATCH_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="pay_MANUAL_PENDING_MATCH_inputEntry_6">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="pay_MANUAL_PENDING_MATCH_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_MANUAL_PENDING_MATCH_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="pay_MANUAL_PENDING_MATCH_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="pay_MANUAL_PENDING_MATCH_outputEntry_1">
+          <text>"MANUAL_PENDING_MATCH"</text>
+        </outputEntry>
+        <annotationEntry id="pay_MANUAL_PENDING_MATCH_annotation_1">
+          <text>Manual payment entered — awaiting invoice matching — Payment has been manually entered by a billing agent (result = entered, not via autopay), but no invoice has been matched to it yet. Payment amount is positive. Requires manual reconciliation step.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT5_DunningEscalation" name="DT5_DunningEscalation">
+    <decisionTable id="DT5_DunningEscalation_table" hitPolicy="FIRST">
+      <input id="DT5_DunningEscalation_input_1" label="overdueInvoiceCount">
+        <inputExpression id="DT5_DunningEscalation_inputExpression_1" typeRef="number">
+          <text>overdueInvoiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_DunningEscalation_input_2" label="userStatusId">
+        <inputExpression id="DT5_DunningEscalation_inputExpression_2" typeRef="number">
+          <text>userStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_DunningEscalation_input_3" label="accountLocked">
+        <inputExpression id="DT5_DunningEscalation_inputExpression_3" typeRef="number">
+          <text>accountLocked</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_DunningEscalation_input_4" label="failedPaymentCount">
+        <inputExpression id="DT5_DunningEscalation_inputExpression_4" typeRef="number">
+          <text>failedPaymentCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_DunningEscalation_input_5" label="deleted">
+        <inputExpression id="DT5_DunningEscalation_inputExpression_5" typeRef="number">
+          <text>deleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_DunningEscalation_input_6" label="maxDaysPastDue">
+        <inputExpression id="DT5_DunningEscalation_inputExpression_6" typeRef="number">
+          <text>maxDaysPastDue</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_DunningEscalation_input_7" label="totalOverdueAmount">
+        <inputExpression id="DT5_DunningEscalation_inputExpression_7" typeRef="number">
+          <text>totalOverdueAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_DunningEscalation_input_8" label="ageingSuspended">
+        <inputExpression id="DT5_DunningEscalation_inputExpression_8" typeRef="number">
+          <text>ageingSuspended</text>
+        </inputExpression>
+      </input>
+      <output id="DT5_DunningEscalation_output_1" name="dunningLevel" label="dunningLevel" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="dun_CURRENT">
+        <inputEntry id="dun_CURRENT_inputEntry_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="dun_CURRENT_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="dun_CURRENT_inputEntry_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="dun_CURRENT_inputEntry_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="dun_CURRENT_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="dun_CURRENT_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_CURRENT_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_CURRENT_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="dun_CURRENT_outputEntry_1">
+          <text>"CURRENT"</text>
+        </outputEntry>
+        <annotationEntry id="dun_CURRENT_annotation_1">
+          <text>Account current — no dunning action — Customer has no overdue invoices, account is active, and all invoices have been paid or are within payment terms. No dunning action required. Credit standing is maintained.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="dun_SOFT_REMINDER">
+        <inputEntry id="dun_SOFT_REMINDER_inputEntry_1">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="dun_SOFT_REMINDER_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="dun_SOFT_REMINDER_inputEntry_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="dun_SOFT_REMINDER_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_SOFT_REMINDER_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_SOFT_REMINDER_inputEntry_6">
+          <text>[1..14]</text>
+        </inputEntry>
+        <inputEntry id="dun_SOFT_REMINDER_inputEntry_7">
+          <text>&lt; 500</text>
+        </inputEntry>
+        <inputEntry id="dun_SOFT_REMINDER_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="dun_SOFT_REMINDER_outputEntry_1">
+          <text>"SOFT_REMINDER"</text>
+        </outputEntry>
+        <annotationEntry id="dun_SOFT_REMINDER_annotation_1">
+          <text>Soft reminder — early overdue within grace period — Customer has one or more overdue invoices but within the grace period (1–14 days past due). Account is not yet locked and amount is modest. A soft reminder notification is appropriate.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="dun_FORMAL_WARNING">
+        <inputEntry id="dun_FORMAL_WARNING_inputEntry_1">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="dun_FORMAL_WARNING_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="dun_FORMAL_WARNING_inputEntry_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="dun_FORMAL_WARNING_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_FORMAL_WARNING_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_FORMAL_WARNING_inputEntry_6">
+          <text>[15..45]</text>
+        </inputEntry>
+        <inputEntry id="dun_FORMAL_WARNING_inputEntry_7">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <inputEntry id="dun_FORMAL_WARNING_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="dun_FORMAL_WARNING_outputEntry_1">
+          <text>"FORMAL_WARNING"</text>
+        </outputEntry>
+        <annotationEntry id="dun_FORMAL_WARNING_annotation_1">
+          <text>Formal warning — overdue beyond grace period — Customer has invoices 15–45 days past due, account is still active but a formal warning letter is required. Amount owed is significant enough to warrant formal communication and payment plan offer.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="dun_SERVICE_SUSPENSION">
+        <inputEntry id="dun_SERVICE_SUSPENSION_inputEntry_1">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="dun_SERVICE_SUSPENSION_inputEntry_2">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="dun_SERVICE_SUSPENSION_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_SERVICE_SUSPENSION_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_SERVICE_SUSPENSION_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_SERVICE_SUSPENSION_inputEntry_6">
+          <text>[46..90]</text>
+        </inputEntry>
+        <inputEntry id="dun_SERVICE_SUSPENSION_inputEntry_7">
+          <text>&gt;= 200</text>
+        </inputEntry>
+        <inputEntry id="dun_SERVICE_SUSPENSION_inputEntry_8">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="dun_SERVICE_SUSPENSION_outputEntry_1">
+          <text>"SERVICE_SUSPENSION"</text>
+        </outputEntry>
+        <annotationEntry id="dun_SERVICE_SUSPENSION_annotation_1">
+          <text>Service suspension — prolonged non-payment — Customer has been in arrears for 46–90 days, account is suspended (userStatusId=2), ageing configuration has triggered suspension, and total overdue amount is substantial. Service is cut until payment received.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="dun_COLLECTIONS_REFERRAL">
+        <inputEntry id="dun_COLLECTIONS_REFERRAL_inputEntry_1">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="dun_COLLECTIONS_REFERRAL_inputEntry_2">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="dun_COLLECTIONS_REFERRAL_inputEntry_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="dun_COLLECTIONS_REFERRAL_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="dun_COLLECTIONS_REFERRAL_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="dun_COLLECTIONS_REFERRAL_inputEntry_6">
+          <text>&gt; 90</text>
+        </inputEntry>
+        <inputEntry id="dun_COLLECTIONS_REFERRAL_inputEntry_7">
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <inputEntry id="dun_COLLECTIONS_REFERRAL_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="dun_COLLECTIONS_REFERRAL_outputEntry_1">
+          <text>"COLLECTIONS_REFERRAL"</text>
+        </outputEntry>
+        <annotationEntry id="dun_COLLECTIONS_REFERRAL_annotation_1">
+          <text>Collections referral — terminal dunning stage — Customer has been suspended for over 90 days, account is locked, multiple invoices severely overdue, and total owed exceeds the collections threshold. Case is referred to external collections agency.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT6_PartnerPayoutEligibility" name="DT6_PartnerPayoutEligibility">
+    <decisionTable id="DT6_PartnerPayoutEligibility_table" hitPolicy="FIRST">
+      <input id="DT6_PartnerPayoutEligibility_input_1" label="partnerBalance">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_1" typeRef="number">
+          <text>partnerBalance</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_PartnerPayoutEligibility_input_2" label="duePayout">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_2" typeRef="number">
+          <text>duePayout</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_PartnerPayoutEligibility_input_3" label="automaticProcess">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_3" typeRef="number">
+          <text>automaticProcess</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_PartnerPayoutEligibility_input_4" label="daysToPayoutPeriodEnd">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_4" typeRef="number">
+          <text>daysToPayoutPeriodEnd</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_PartnerPayoutEligibility_input_5" label="overdueInvoiceCount">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_5" typeRef="number">
+          <text>overdueInvoiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_PartnerPayoutEligibility_input_6" label="userStatusId">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_6" typeRef="number">
+          <text>userStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_PartnerPayoutEligibility_input_7" label="accountLocked">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_7" typeRef="number">
+          <text>accountLocked</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_PartnerPayoutEligibility_input_8" label="totalOverdueAmount">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_8" typeRef="number">
+          <text>totalOverdueAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_PartnerPayoutEligibility_input_9" label="deleted">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_9" typeRef="number">
+          <text>deleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_PartnerPayoutEligibility_input_10" label="totalPayoutsLifetime">
+        <inputExpression id="DT6_PartnerPayoutEligibility_inputExpression_10" typeRef="number">
+          <text>totalPayoutsLifetime</text>
+        </inputExpression>
+      </input>
+      <output id="DT6_PartnerPayoutEligibility_output_1" name="payoutEligibility" label="payoutEligibility" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="payout_ELIGIBLE_AUTO">
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_2">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_4">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_6">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_AUTO_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="payout_ELIGIBLE_AUTO_outputEntry_1">
+          <text>"ELIGIBLE_AUTO"</text>
+        </outputEntry>
+        <annotationEntry id="payout_ELIGIBLE_AUTO_annotation_1">
+          <text>Partner eligible for automatic payout processing — Partner account has a positive balance, a due payout amount is calculated, automatic processing is enabled, the payout period has ended, and the customer linked to the partner is in good standing (not overdue). Payout can be processed automatically.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="payout_ELIGIBLE_MANUAL">
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_2">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_4">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_6">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_7">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ELIGIBLE_MANUAL_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="payout_ELIGIBLE_MANUAL_outputEntry_1">
+          <text>"ELIGIBLE_MANUAL"</text>
+        </outputEntry>
+        <annotationEntry id="payout_ELIGIBLE_MANUAL_annotation_1">
+          <text>Partner eligible for manual payout — automatic disabled — Partner has earned a positive payout and the period has ended, but automatic processing is disabled. Payout must be manually approved and initiated. Customer account is in good standing.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="payout_HELD_CUSTOMER_OVERDUE">
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_2">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_4">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_5">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_8">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_9">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="payout_HELD_CUSTOMER_OVERDUE_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="payout_HELD_CUSTOMER_OVERDUE_outputEntry_1">
+          <text>"HELD_CUSTOMER_OVERDUE"</text>
+        </outputEntry>
+        <annotationEntry id="payout_HELD_CUSTOMER_OVERDUE_annotation_1">
+          <text>Payout held — linked customer account overdue — Partner has earned a payout and the period has ended, but the linked customer account has overdue invoices. Payout is held until the customer's account is brought current to prevent partner from receiving funds while their account is delinquent.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="payout_ANOMALY_ZERO_BALANCE">
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_1">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_2">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_6">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_9">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="payout_ANOMALY_ZERO_BALANCE_inputEntry_10">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <outputEntry id="payout_ANOMALY_ZERO_BALANCE_outputEntry_1">
+          <text>"ANOMALY_ZERO_BALANCE"</text>
+        </outputEntry>
+        <annotationEntry id="payout_ANOMALY_ZERO_BALANCE_annotation_1">
+          <text>Payout anomaly — due payout with zero partner balance — System has calculated a due payout amount but the partner's recorded balance is zero or negative. This is a data inconsistency: payouts cannot exceed the balance. Requires manual investigation before processing.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="payout_NOT_DUE">
+        <inputEntry id="payout_NOT_DUE_inputEntry_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_NOT_DUE_inputEntry_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="payout_NOT_DUE_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_NOT_DUE_inputEntry_4">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="payout_NOT_DUE_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_NOT_DUE_inputEntry_6">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="payout_NOT_DUE_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_NOT_DUE_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="payout_NOT_DUE_inputEntry_9">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="payout_NOT_DUE_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="payout_NOT_DUE_outputEntry_1">
+          <text>"NOT_DUE"</text>
+        </outputEntry>
+        <annotationEntry id="payout_NOT_DUE_annotation_1">
+          <text>No payout due — period not yet ended or zero earnings — Partner's payout period has not yet ended or no earnings have been recorded in this period. No payout action required. Normal operational state during active earning period.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT7_MediationRecordStatus" name="DT7_MediationRecordStatus">
+    <decisionTable id="DT7_MediationRecordStatus_table" hitPolicy="FIRST">
+      <input id="DT7_MediationRecordStatus_input_1" label="recordStatusId">
+        <inputExpression id="DT7_MediationRecordStatus_inputExpression_1" typeRef="number">
+          <text>recordStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_MediationRecordStatus_input_2" label="errorLineCount">
+        <inputExpression id="DT7_MediationRecordStatus_inputExpression_2" typeRef="number">
+          <text>errorLineCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_MediationRecordStatus_input_3" label="totalLineCount">
+        <inputExpression id="DT7_MediationRecordStatus_inputExpression_3" typeRef="number">
+          <text>totalLineCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_MediationRecordStatus_input_4" label="unresolvedLineCount">
+        <inputExpression id="DT7_MediationRecordStatus_inputExpression_4" typeRef="number">
+          <text>unresolvedLineCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_MediationRecordStatus_input_5" label="resolvedOrderCount">
+        <inputExpression id="DT7_MediationRecordStatus_inputExpression_5" typeRef="number">
+          <text>resolvedOrderCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_MediationRecordStatus_input_6" label="deleted">
+        <inputExpression id="DT7_MediationRecordStatus_inputExpression_6" typeRef="number">
+          <text>deleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_MediationRecordStatus_input_7" label="duplicateKeyCount">
+        <inputExpression id="DT7_MediationRecordStatus_inputExpression_7" typeRef="number">
+          <text>duplicateKeyCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_MediationRecordStatus_input_8" label="userStatusId">
+        <inputExpression id="DT7_MediationRecordStatus_inputExpression_8" typeRef="number">
+          <text>userStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_MediationRecordStatus_input_9" label="totalOverdueAmount">
+        <inputExpression id="DT7_MediationRecordStatus_inputExpression_9" typeRef="number">
+          <text>totalOverdueAmount</text>
+        </inputExpression>
+      </input>
+      <output id="DT7_MediationRecordStatus_output_1" name="mediationStatus" label="mediationStatus" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="med_CLEAN_PROCESSED">
+        <inputEntry id="med_CLEAN_PROCESSED_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="med_CLEAN_PROCESSED_inputEntry_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="med_CLEAN_PROCESSED_inputEntry_3">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="med_CLEAN_PROCESSED_inputEntry_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="med_CLEAN_PROCESSED_inputEntry_5">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="med_CLEAN_PROCESSED_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="med_CLEAN_PROCESSED_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_CLEAN_PROCESSED_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_CLEAN_PROCESSED_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="med_CLEAN_PROCESSED_outputEntry_1">
+          <text>"CLEAN_PROCESSED"</text>
+        </outputEntry>
+        <annotationEntry id="med_CLEAN_PROCESSED_annotation_1">
+          <text>Mediation record fully processed — no errors — Mediation record has been fully processed: status is done, zero error lines, all lines successfully resolved to orders or invoices, and at least a minimum number of lines were present. No manual intervention required.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="med_PARTIAL_ERRORS">
+        <inputEntry id="med_PARTIAL_ERRORS_inputEntry_1">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="med_PARTIAL_ERRORS_inputEntry_2">
+          <text>&gt;= 1 and &lt; totalLineCount</text>
+        </inputEntry>
+        <inputEntry id="med_PARTIAL_ERRORS_inputEntry_3">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="med_PARTIAL_ERRORS_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_PARTIAL_ERRORS_inputEntry_5">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="med_PARTIAL_ERRORS_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="med_PARTIAL_ERRORS_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_PARTIAL_ERRORS_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_PARTIAL_ERRORS_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="med_PARTIAL_ERRORS_outputEntry_1">
+          <text>"PARTIAL_ERRORS"</text>
+        </outputEntry>
+        <annotationEntry id="med_PARTIAL_ERRORS_annotation_1">
+          <text>Mediation record partially processed — some error lines — Mediation record processing is complete but some lines failed (error count &gt; 0 and &lt; total lines). Some orders were successfully resolved. Partial revenue impact — error lines need manual review.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="med_FULL_ERROR">
+        <inputEntry id="med_FULL_ERROR_inputEntry_1">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="med_FULL_ERROR_inputEntry_2">
+          <text>totalLineCount</text>
+        </inputEntry>
+        <inputEntry id="med_FULL_ERROR_inputEntry_3">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="med_FULL_ERROR_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_FULL_ERROR_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="med_FULL_ERROR_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="med_FULL_ERROR_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_FULL_ERROR_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_FULL_ERROR_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="med_FULL_ERROR_outputEntry_1">
+          <text>"FULL_ERROR"</text>
+        </outputEntry>
+        <annotationEntry id="med_FULL_ERROR_annotation_1">
+          <text>Mediation record fully failed — all lines in error — Every line in the mediation record is in error status: errorLineCount equals totalLineCount. No orders were resolved from this record. Revenue leakage risk — entire record must be reprocessed or written off.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="med_DUPLICATE_DETECTED">
+        <inputEntry id="med_DUPLICATE_DETECTED_inputEntry_1">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="med_DUPLICATE_DETECTED_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_DUPLICATE_DETECTED_inputEntry_3">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="med_DUPLICATE_DETECTED_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_DUPLICATE_DETECTED_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="med_DUPLICATE_DETECTED_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="med_DUPLICATE_DETECTED_inputEntry_7">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="med_DUPLICATE_DETECTED_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_DUPLICATE_DETECTED_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="med_DUPLICATE_DETECTED_outputEntry_1">
+          <text>"DUPLICATE_DETECTED"</text>
+        </outputEntry>
+        <annotationEntry id="med_DUPLICATE_DETECTED_annotation_1">
+          <text>Mediation record duplicate — key already processed — Mediation record has a jBilling key that already exists in a previously processed record (duplicateKeyCount &gt; 0). Record is in error state. Duplicate usage data must not be billed twice.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="med_REVENUE_LEAKAGE_RISK">
+        <inputEntry id="med_REVENUE_LEAKAGE_RISK_inputEntry_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_REVENUE_LEAKAGE_RISK_inputEntry_2">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="med_REVENUE_LEAKAGE_RISK_inputEntry_3">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="med_REVENUE_LEAKAGE_RISK_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_REVENUE_LEAKAGE_RISK_inputEntry_5">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="med_REVENUE_LEAKAGE_RISK_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="med_REVENUE_LEAKAGE_RISK_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="med_REVENUE_LEAKAGE_RISK_inputEntry_8">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="med_REVENUE_LEAKAGE_RISK_inputEntry_9">
+          <text>&gt;= 200</text>
+        </inputEntry>
+        <outputEntry id="med_REVENUE_LEAKAGE_RISK_outputEntry_1">
+          <text>"REVENUE_LEAKAGE_RISK"</text>
+        </outputEntry>
+        <annotationEntry id="med_REVENUE_LEAKAGE_RISK_annotation_1">
+          <text>Mediation revenue leakage — high error volume on active customer — Mediation record has many error lines on an active, large-balance customer account. The combination of high error count and large overdue or active balance means significant revenue is at risk of not being billed correctly.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT8_BillingProcessHealth" name="DT8_BillingProcessHealth">
+    <decisionTable id="DT8_BillingProcessHealth_table" hitPolicy="FIRST">
+      <input id="DT8_BillingProcessHealth_input_1" label="invoicesGenerated">
+        <inputExpression id="DT8_BillingProcessHealth_inputExpression_1" typeRef="number">
+          <text>invoicesGenerated</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_BillingProcessHealth_input_2" label="failedInvoiceCount">
+        <inputExpression id="DT8_BillingProcessHealth_inputExpression_2" typeRef="number">
+          <text>failedInvoiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_BillingProcessHealth_input_3" label="runCompleted">
+        <inputExpression id="DT8_BillingProcessHealth_inputExpression_3" typeRef="number">
+          <text>runCompleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_BillingProcessHealth_input_4" label="runDurationMinutes">
+        <inputExpression id="DT8_BillingProcessHealth_inputExpression_4" typeRef="number">
+          <text>runDurationMinutes</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_BillingProcessHealth_input_5" label="isReviewRun">
+        <inputExpression id="DT8_BillingProcessHealth_inputExpression_5" typeRef="number">
+          <text>isReviewRun</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_BillingProcessHealth_input_6" label="invoicesProcessed">
+        <inputExpression id="DT8_BillingProcessHealth_inputExpression_6" typeRef="number">
+          <text>invoicesProcessed</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_BillingProcessHealth_input_7" label="activeOrderLineCount">
+        <inputExpression id="DT8_BillingProcessHealth_inputExpression_7" typeRef="number">
+          <text>activeOrderLineCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_BillingProcessHealth_input_8" label="userStatusId">
+        <inputExpression id="DT8_BillingProcessHealth_inputExpression_8" typeRef="number">
+          <text>userStatusId</text>
+        </inputExpression>
+      </input>
+      <output id="DT8_BillingProcessHealth_output_1" name="billingProcessHealth" label="billingProcessHealth" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="bproc_SUCCESSFUL_RUN">
+        <inputEntry id="bproc_SUCCESSFUL_RUN_inputEntry_1">
+          <text>&gt; 0 and &gt;= invoicesProcessed</text>
+        </inputEntry>
+        <inputEntry id="bproc_SUCCESSFUL_RUN_inputEntry_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="bproc_SUCCESSFUL_RUN_inputEntry_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="bproc_SUCCESSFUL_RUN_inputEntry_4">
+          <text>&lt;= 240</text>
+        </inputEntry>
+        <inputEntry id="bproc_SUCCESSFUL_RUN_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="bproc_SUCCESSFUL_RUN_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_SUCCESSFUL_RUN_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_SUCCESSFUL_RUN_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="bproc_SUCCESSFUL_RUN_outputEntry_1">
+          <text>"SUCCESSFUL_RUN"</text>
+        </outputEntry>
+        <annotationEntry id="bproc_SUCCESSFUL_RUN_annotation_1">
+          <text>Billing process run completed successfully — Billing process run has finished with invoices generated matching the expected count, no failed invoices, run completed within the same day it started, and entity is active. Process health is nominal.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="bproc_REVIEW_MODE">
+        <inputEntry id="bproc_REVIEW_MODE_inputEntry_1">
+          <text>&gt; 0 and &gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="bproc_REVIEW_MODE_inputEntry_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="bproc_REVIEW_MODE_inputEntry_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="bproc_REVIEW_MODE_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_REVIEW_MODE_inputEntry_5">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="bproc_REVIEW_MODE_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_REVIEW_MODE_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_REVIEW_MODE_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="bproc_REVIEW_MODE_outputEntry_1">
+          <text>"REVIEW_MODE"</text>
+        </outputEntry>
+        <annotationEntry id="bproc_REVIEW_MODE_annotation_1">
+          <text>Billing run in review mode — not yet committed — Billing process was run in review (dry-run) mode: invoices have been generated for preview but not committed to customer accounts. Run is complete but results require approval before production processing.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="bproc_PARTIAL_FAILURE">
+        <inputEntry id="bproc_PARTIAL_FAILURE_inputEntry_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="bproc_PARTIAL_FAILURE_inputEntry_2">
+          <text>&gt;= 1 and &lt; invoicesGenerated</text>
+        </inputEntry>
+        <inputEntry id="bproc_PARTIAL_FAILURE_inputEntry_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="bproc_PARTIAL_FAILURE_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_PARTIAL_FAILURE_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="bproc_PARTIAL_FAILURE_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_PARTIAL_FAILURE_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_PARTIAL_FAILURE_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="bproc_PARTIAL_FAILURE_outputEntry_1">
+          <text>"PARTIAL_FAILURE"</text>
+        </outputEntry>
+        <annotationEntry id="bproc_PARTIAL_FAILURE_annotation_1">
+          <text>Billing run partial failure — some invoices failed — Billing run completed but a portion of invoices failed to generate. Failed count is greater than zero but less than total invoices generated. Revenue impact is partial — failed invoices need manual reprocessing.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="bproc_TIMEOUT_INCOMPLETE">
+        <inputEntry id="bproc_TIMEOUT_INCOMPLETE_inputEntry_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="bproc_TIMEOUT_INCOMPLETE_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_TIMEOUT_INCOMPLETE_inputEntry_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="bproc_TIMEOUT_INCOMPLETE_inputEntry_4">
+          <text>&gt; 240</text>
+        </inputEntry>
+        <inputEntry id="bproc_TIMEOUT_INCOMPLETE_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="bproc_TIMEOUT_INCOMPLETE_inputEntry_6">
+          <text>&lt; invoicesGenerated</text>
+        </inputEntry>
+        <inputEntry id="bproc_TIMEOUT_INCOMPLETE_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_TIMEOUT_INCOMPLETE_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="bproc_TIMEOUT_INCOMPLETE_outputEntry_1">
+          <text>"TIMEOUT_INCOMPLETE"</text>
+        </outputEntry>
+        <annotationEntry id="bproc_TIMEOUT_INCOMPLETE_annotation_1">
+          <text>Billing run timed out — incomplete processing — Billing run started but did not complete within the expected window (runCompleted=0), ran for an excessive duration, and the number of processed invoices is less than generated. System intervention required to resume or restart the run.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="bproc_ZERO_OUTPUT_ALERT">
+        <inputEntry id="bproc_ZERO_OUTPUT_ALERT_inputEntry_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="bproc_ZERO_OUTPUT_ALERT_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_ZERO_OUTPUT_ALERT_inputEntry_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="bproc_ZERO_OUTPUT_ALERT_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_ZERO_OUTPUT_ALERT_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="bproc_ZERO_OUTPUT_ALERT_inputEntry_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="bproc_ZERO_OUTPUT_ALERT_inputEntry_7">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="bproc_ZERO_OUTPUT_ALERT_inputEntry_8">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="bproc_ZERO_OUTPUT_ALERT_outputEntry_1">
+          <text>"ZERO_OUTPUT_ALERT"</text>
+        </outputEntry>
+        <annotationEntry id="bproc_ZERO_OUTPUT_ALERT_annotation_1">
+          <text>Billing run completed with zero invoices — configuration alert — Billing process run completed successfully (runCompleted=1) but generated zero invoices. This is unexpected for an entity with active customers and orders. Likely indicates a misconfiguration in billing period, order dates, or entity setup.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT9_TaxComplianceAssessment" name="DT9_TaxComplianceAssessment">
+    <decisionTable id="DT9_TaxComplianceAssessment_table" hitPolicy="FIRST">
+      <input id="DT9_TaxComplianceAssessment_input_1" label="taxExempt">
+        <inputExpression id="DT9_TaxComplianceAssessment_inputExpression_1" typeRef="number">
+          <text>taxExempt</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_TaxComplianceAssessment_input_2" label="exemptionCertificateValid">
+        <inputExpression id="DT9_TaxComplianceAssessment_inputExpression_2" typeRef="number">
+          <text>exemptionCertificateValid</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_TaxComplianceAssessment_input_3" label="taxableAmount">
+        <inputExpression id="DT9_TaxComplianceAssessment_inputExpression_3" typeRef="number">
+          <text>taxableAmount</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_TaxComplianceAssessment_input_4" label="daysToCertificateExpiry">
+        <inputExpression id="DT9_TaxComplianceAssessment_inputExpression_4" typeRef="number">
+          <text>daysToCertificateExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_TaxComplianceAssessment_input_5" label="manualReviewRequired">
+        <inputExpression id="DT9_TaxComplianceAssessment_inputExpression_5" typeRef="number">
+          <text>manualReviewRequired</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_TaxComplianceAssessment_input_6" label="deleted">
+        <inputExpression id="DT9_TaxComplianceAssessment_inputExpression_6" typeRef="number">
+          <text>deleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_TaxComplianceAssessment_input_7" label="taxRatePct">
+        <inputExpression id="DT9_TaxComplianceAssessment_inputExpression_7" typeRef="number">
+          <text>taxRatePct</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_TaxComplianceAssessment_input_8" label="taxJurisdictionConfigured">
+        <inputExpression id="DT9_TaxComplianceAssessment_inputExpression_8" typeRef="number">
+          <text>taxJurisdictionConfigured</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_TaxComplianceAssessment_input_9" label="userStatusId">
+        <inputExpression id="DT9_TaxComplianceAssessment_inputExpression_9" typeRef="number">
+          <text>userStatusId</text>
+        </inputExpression>
+      </input>
+      <output id="DT9_TaxComplianceAssessment_output_1" name="taxComplianceStatus" label="taxComplianceStatus" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="tax_EXEMPT_VALID">
+        <inputEntry id="tax_EXEMPT_VALID_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_VALID_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_VALID_inputEntry_3">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_VALID_inputEntry_4">
+          <text>&gt;= 0</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_VALID_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_VALID_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_VALID_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_VALID_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_VALID_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="tax_EXEMPT_VALID_outputEntry_1">
+          <text>"EXEMPT_VALID"</text>
+        </outputEntry>
+        <annotationEntry id="tax_EXEMPT_VALID_annotation_1">
+          <text>Tax exempt customer — valid certificate on file — Customer has a valid tax exemption certificate, taxable amount is positive, certificate has not expired, and no manual review flag is present. Tax should not be charged.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="tax_EXEMPT_EXPIRING">
+        <inputEntry id="tax_EXEMPT_EXPIRING_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_EXPIRING_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_EXPIRING_inputEntry_3">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_EXPIRING_inputEntry_4">
+          <text>[0..30]</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_EXPIRING_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_EXPIRING_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_EXPIRING_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_EXPIRING_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_EXEMPT_EXPIRING_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="tax_EXEMPT_EXPIRING_outputEntry_1">
+          <text>"EXEMPT_EXPIRING"</text>
+        </outputEntry>
+        <annotationEntry id="tax_EXEMPT_EXPIRING_annotation_1">
+          <text>Tax exemption certificate nearing expiry — Customer is tax exempt with a valid certificate, but the certificate expires within 30 days. Billing may proceed tax-exempt while renewal notification is sent.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="tax_STANDARD_TAXABLE">
+        <inputEntry id="tax_STANDARD_TAXABLE_inputEntry_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_STANDARD_TAXABLE_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_STANDARD_TAXABLE_inputEntry_3">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="tax_STANDARD_TAXABLE_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_STANDARD_TAXABLE_inputEntry_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_STANDARD_TAXABLE_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_STANDARD_TAXABLE_inputEntry_7">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="tax_STANDARD_TAXABLE_inputEntry_8">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="tax_STANDARD_TAXABLE_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="tax_STANDARD_TAXABLE_outputEntry_1">
+          <text>"STANDARD_TAXABLE"</text>
+        </outputEntry>
+        <annotationEntry id="tax_STANDARD_TAXABLE_annotation_1">
+          <text>Standard taxable transaction — Customer is not tax exempt, taxable amount is positive, jurisdiction is configured, and tax rate is available. Standard tax calculation can be applied.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="tax_MISSING_JURISDICTION">
+        <inputEntry id="tax_MISSING_JURISDICTION_inputEntry_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_MISSING_JURISDICTION_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_MISSING_JURISDICTION_inputEntry_3">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="tax_MISSING_JURISDICTION_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_MISSING_JURISDICTION_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_MISSING_JURISDICTION_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_MISSING_JURISDICTION_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_MISSING_JURISDICTION_inputEntry_8">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_MISSING_JURISDICTION_inputEntry_9">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="tax_MISSING_JURISDICTION_outputEntry_1">
+          <text>"MISSING_JURISDICTION"</text>
+        </outputEntry>
+        <annotationEntry id="tax_MISSING_JURISDICTION_annotation_1">
+          <text>Tax calculation blocked — missing jurisdiction — Taxable amount exists but the tax jurisdiction or tax rate configuration is missing. Billing should be held for tax setup correction.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="tax_REVIEW_REQUIRED">
+        <inputEntry id="tax_REVIEW_REQUIRED_inputEntry_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_REVIEW_REQUIRED_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_REVIEW_REQUIRED_inputEntry_3">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="tax_REVIEW_REQUIRED_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_REVIEW_REQUIRED_inputEntry_5">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="tax_REVIEW_REQUIRED_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="tax_REVIEW_REQUIRED_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_REVIEW_REQUIRED_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="tax_REVIEW_REQUIRED_inputEntry_9">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="tax_REVIEW_REQUIRED_outputEntry_1">
+          <text>"REVIEW_REQUIRED"</text>
+        </outputEntry>
+        <annotationEntry id="tax_REVIEW_REQUIRED_annotation_1">
+          <text>Tax compliance manual review required — Tax transaction has inconsistent exemption or jurisdiction data and has been flagged for manual review before invoice finalization.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT10_SubscriptionLifecycleAction" name="DT10_SubscriptionLifecycleAction">
+    <decisionTable id="DT10_SubscriptionLifecycleAction_table" hitPolicy="FIRST">
+      <input id="DT10_SubscriptionLifecycleAction_input_1" label="subscriptionStatusId">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_1" typeRef="number">
+          <text>subscriptionStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_2" label="orderStatusId">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_2" typeRef="number">
+          <text>orderStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_3" label="daysToSubscriptionStart">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_3" typeRef="number">
+          <text>daysToSubscriptionStart</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_4" label="activeOrderLineCount">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_4" typeRef="number">
+          <text>activeOrderLineCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_5" label="userStatusId">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_5" typeRef="number">
+          <text>userStatusId</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_6" label="deleted">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_6" typeRef="number">
+          <text>deleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_7" label="daysToOrderExpiry">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_7" typeRef="number">
+          <text>daysToOrderExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_8" label="renewalOrderCount">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_8" typeRef="number">
+          <text>renewalOrderCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_9" label="overdueInvoiceCount">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_9" typeRef="number">
+          <text>overdueInvoiceCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_10" label="accountLocked">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_10" typeRef="number">
+          <text>accountLocked</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_11" label="maxDaysPastDue">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_11" typeRef="number">
+          <text>maxDaysPastDue</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_SubscriptionLifecycleAction_input_12" label="totalOverdueAmount">
+        <inputExpression id="DT10_SubscriptionLifecycleAction_inputExpression_12" typeRef="number">
+          <text>totalOverdueAmount</text>
+        </inputExpression>
+      </input>
+      <output id="DT10_SubscriptionLifecycleAction_output_1" name="subscriptionAction" label="subscriptionAction" typeRef="string"/>
+      <annotation name="Description"/>
+      <rule id="sub_ACTIVATE_NEW">
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_3">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_5">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_ACTIVATE_NEW_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="sub_ACTIVATE_NEW_outputEntry_1">
+          <text>"ACTIVATE_NEW"</text>
+        </outputEntry>
+        <annotationEntry id="sub_ACTIVATE_NEW_annotation_1">
+          <text>Activate new subscription — Subscription order is approved, the start date has arrived, account is active, and at least one order line exists. Subscription can be activated.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="sub_RENEW_ACTIVE">
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_7">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_8">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_9">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_10">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_RENEW_ACTIVE_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="sub_RENEW_ACTIVE_outputEntry_1">
+          <text>"RENEW_ACTIVE"</text>
+        </outputEntry>
+        <annotationEntry id="sub_RENEW_ACTIVE_annotation_1">
+          <text>Renew active subscription — Active subscription is due for renewal, renewal order exists, customer is current, and billing is not blocked. Renewal can be processed.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="sub_NOTIFY_EXPIRING">
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_7">
+          <text>[1..14]</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_8">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_10">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_NOTIFY_EXPIRING_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="sub_NOTIFY_EXPIRING_outputEntry_1">
+          <text>"NOTIFY_EXPIRING"</text>
+        </outputEntry>
+        <annotationEntry id="sub_NOTIFY_EXPIRING_annotation_1">
+          <text>Notify customer of upcoming subscription expiry — Active subscription expires within 14 days, no renewal order exists, and account is not locked. Customer should receive an expiry notification.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="sub_SUSPEND_NONPAYMENT">
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_9">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_10">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_11">
+          <text>&gt;= 45</text>
+        </inputEntry>
+        <inputEntry id="sub_SUSPEND_NONPAYMENT_inputEntry_12">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <outputEntry id="sub_SUSPEND_NONPAYMENT_outputEntry_1">
+          <text>"SUSPEND_NONPAYMENT"</text>
+        </outputEntry>
+        <annotationEntry id="sub_SUSPEND_NONPAYMENT_annotation_1">
+          <text>Suspend subscription for non-payment — Active subscription belongs to a customer with overdue invoices beyond the formal warning period and unresolved balance. Subscription should be suspended.</text>
+        </annotationEntry>
+      </rule>
+      <rule id="sub_CANCEL_EXPIRED">
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_7">
+          <text>&lt; 0</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_8">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_10">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="sub_CANCEL_EXPIRED_inputEntry_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="sub_CANCEL_EXPIRED_outputEntry_1">
+          <text>"CANCEL_EXPIRED"</text>
+        </outputEntry>
+        <annotationEntry id="sub_CANCEL_EXPIRED_annotation_1">
+          <text>Cancel expired subscription with no renewal — Subscription has expired, no renewal order exists, and customer has been notified or suspended. Subscription can be cancelled to stop further service entitlement.</text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

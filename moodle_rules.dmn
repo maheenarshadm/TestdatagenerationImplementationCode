@@ -1,0 +1,2463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="moodle_rules_10_tables_50_rules" name="Moodle Rules 10 Tables 50 Rules" namespace="http://camunda.org/schema/1.0/dmn/moodle-rules">
+  <decision id="DT1_EnrolmentValidity" name="DT1_EnrolmentValidity">
+    <description>Decision table generated from JSON rules for DT1_EnrolmentValidity.</description>
+    <decisionTable id="DT1_EnrolmentValidity_table" hitPolicy="FIRST">
+      <input id="DT1_EnrolmentValidity_input_1" label="userConfirmed">
+        <inputExpression id="DT1_EnrolmentValidity_inputExpr_1" typeRef="number">
+          <text>userConfirmed</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_EnrolmentValidity_input_2" label="enrolStatus">
+        <inputExpression id="DT1_EnrolmentValidity_inputExpr_2" typeRef="number">
+          <text>enrolStatus</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_EnrolmentValidity_input_3" label="courseVisible">
+        <inputExpression id="DT1_EnrolmentValidity_inputExpr_3" typeRef="number">
+          <text>courseVisible</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_EnrolmentValidity_input_4" label="daysUntilEnrolExpiry">
+        <inputExpression id="DT1_EnrolmentValidity_inputExpr_4" typeRef="number">
+          <text>daysUntilEnrolExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_EnrolmentValidity_input_5" label="daysSinceEnrolment">
+        <inputExpression id="DT1_EnrolmentValidity_inputExpr_5" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_EnrolmentValidity_input_6" label="enrolPeriodDays">
+        <inputExpression id="DT1_EnrolmentValidity_inputExpr_6" typeRef="number">
+          <text>enrolPeriodDays</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_EnrolmentValidity_input_7" label="moduleCompletionCount">
+        <inputExpression id="DT1_EnrolmentValidity_inputExpr_7" typeRef="number">
+          <text>moduleCompletionCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_EnrolmentValidity_input_8" label="timecompleted">
+        <inputExpression id="DT1_EnrolmentValidity_inputExpr_8" typeRef="number">
+          <text>timecompleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT1_EnrolmentValidity_input_9" label="moduleCompletionPct">
+        <inputExpression id="DT1_EnrolmentValidity_inputExpr_9" typeRef="number">
+          <text>moduleCompletionPct</text>
+        </inputExpression>
+      </input>
+      <output id="DT1_EnrolmentValidity_output" label="enrolmentStatus" name="enrolmentStatus" typeRef="string"/>
+      <rule id="enrol_ACTIVE_FULL">
+        <description>Fully active enrolment within period - Student has a confirmed, active enrolment with substantial time remaining and the course is open. Requires user confirmed, enrolment active, course visible, days until expiry adequate, and enrolment age meaningful.</description>
+        <inputEntry id="enrol_ACTIVE_FULL_input_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_FULL_input_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_FULL_input_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_FULL_input_4">
+          <text>&gt;= 30</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_FULL_input_5">
+          <text>&gt;= 7</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_FULL_input_6">
+          <text>&gt;= 90</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_FULL_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_FULL_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_FULL_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="enrol_ACTIVE_FULL_output">
+          <text>"ACTIVE_FULL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="enrol_ACTIVE_EXPIRING">
+        <description>Active enrolment approaching expiry - Enrolment is valid and active but within the final 30-day window. Triggers renewal prompt. Student must have actually started (daysSinceEnrolment &gt; 0) and have some module activity.</description>
+        <inputEntry id="enrol_ACTIVE_EXPIRING_input_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_EXPIRING_input_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_EXPIRING_input_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_EXPIRING_input_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_EXPIRING_input_5">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_EXPIRING_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_EXPIRING_input_7">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_EXPIRING_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_ACTIVE_EXPIRING_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="enrol_ACTIVE_EXPIRING_output">
+          <text>"ACTIVE_EXPIRING"</text>
+        </outputEntry>
+      </rule>
+      <rule id="enrol_SUSPENDED_ADMIN">
+        <description>Enrolment administratively suspended - User account or enrolment has been suspended by admin (status=1). Student was previously active (had some completions) but access is now blocked.</description>
+        <inputEntry id="enrol_SUSPENDED_ADMIN_input_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_SUSPENDED_ADMIN_input_2">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_SUSPENDED_ADMIN_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_SUSPENDED_ADMIN_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_SUSPENDED_ADMIN_input_5">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="enrol_SUSPENDED_ADMIN_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_SUSPENDED_ADMIN_input_7">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="enrol_SUSPENDED_ADMIN_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_SUSPENDED_ADMIN_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="enrol_SUSPENDED_ADMIN_output">
+          <text>"SUSPENDED_ADMIN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="enrol_EXPIRED_NO_COMPLETION">
+        <description>Enrolment expired without course completion - Enrolment period has ended (daysUntilEnrolExpiry &lt; 0) and the student never reached a completion event. Module completion below threshold and no completion timestamp recorded.</description>
+        <inputEntry id="enrol_EXPIRED_NO_COMPLETION_input_1">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_NO_COMPLETION_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_NO_COMPLETION_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_NO_COMPLETION_input_4">
+          <text>&lt; 0</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_NO_COMPLETION_input_5">
+          <text>&gt;= 30</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_NO_COMPLETION_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_NO_COMPLETION_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_NO_COMPLETION_input_8">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_EXPIRED_NO_COMPLETION_input_9">
+          <text>&lt; 80</text>
+        </inputEntry>
+        <outputEntry id="enrol_EXPIRED_NO_COMPLETION_output">
+          <text>"EXPIRED_NO_COMPLETION"</text>
+        </outputEntry>
+      </rule>
+      <rule id="enrol_PENDING_UNCONFIRMED">
+        <description>Enrolment pending email confirmation - User has enrolled but not confirmed email. Course is visible and enrolment was just created. Cannot access full course materials until confirmed.</description>
+        <inputEntry id="enrol_PENDING_UNCONFIRMED_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_PENDING_UNCONFIRMED_input_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_PENDING_UNCONFIRMED_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_PENDING_UNCONFIRMED_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_PENDING_UNCONFIRMED_input_5">
+          <text>&lt;= 3</text>
+        </inputEntry>
+        <inputEntry id="enrol_PENDING_UNCONFIRMED_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_PENDING_UNCONFIRMED_input_7">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="enrol_PENDING_UNCONFIRMED_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="enrol_PENDING_UNCONFIRMED_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="enrol_PENDING_UNCONFIRMED_output">
+          <text>"PENDING_UNCONFIRMED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT2_AssignmentCompleteness" name="DT2_AssignmentCompleteness">
+    <description>Decision table generated from JSON rules for DT2_AssignmentCompleteness.</description>
+    <decisionTable id="DT2_AssignmentCompleteness_table" hitPolicy="FIRST">
+      <input id="DT2_AssignmentCompleteness_input_1" label="unsubmittedCount">
+        <inputExpression id="DT2_AssignmentCompleteness_inputExpr_1" typeRef="number">
+          <text>unsubmittedCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_AssignmentCompleteness_input_2" label="submittedLate">
+        <inputExpression id="DT2_AssignmentCompleteness_inputExpr_2" typeRef="number">
+          <text>submittedLate</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_AssignmentCompleteness_input_3" label="avgAssignGrade">
+        <inputExpression id="DT2_AssignmentCompleteness_inputExpr_3" typeRef="number">
+          <text>avgAssignGrade</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_AssignmentCompleteness_input_4" label="maxAttemptNumber">
+        <inputExpression id="DT2_AssignmentCompleteness_inputExpr_4" typeRef="number">
+          <text>maxAttemptNumber</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_AssignmentCompleteness_input_5" label="assignPenaltyActive">
+        <inputExpression id="DT2_AssignmentCompleteness_inputExpr_5" typeRef="number">
+          <text>assignPenaltyActive</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_AssignmentCompleteness_input_6" label="totalAssignments">
+        <inputExpression id="DT2_AssignmentCompleteness_inputExpr_6" typeRef="number">
+          <text>totalAssignments</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_AssignmentCompleteness_input_7" label="submittedOnTime">
+        <inputExpression id="DT2_AssignmentCompleteness_inputExpr_7" typeRef="number">
+          <text>submittedOnTime</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_AssignmentCompleteness_input_8" label="daysSinceEnrolment">
+        <inputExpression id="DT2_AssignmentCompleteness_inputExpr_8" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT2_AssignmentCompleteness_input_9" label="overriddenGradeCount">
+        <inputExpression id="DT2_AssignmentCompleteness_inputExpr_9" typeRef="number">
+          <text>overriddenGradeCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT2_AssignmentCompleteness_output" label="assignCompliance" name="assignCompliance" typeRef="string"/>
+      <rule id="assign_FULLY_COMPLIANT">
+        <description>All assignments submitted on time with passing grades - Student submitted all course assignments before deadlines, achieved passing grades on average, no resubmission attempts beyond first, and no penalty markers. Strongest compliance outcome.</description>
+        <inputEntry id="assign_FULLY_COMPLIANT_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="assign_FULLY_COMPLIANT_input_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="assign_FULLY_COMPLIANT_input_3">
+          <text>&gt;= 60</text>
+        </inputEntry>
+        <inputEntry id="assign_FULLY_COMPLIANT_input_4">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="assign_FULLY_COMPLIANT_input_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="assign_FULLY_COMPLIANT_input_6">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="assign_FULLY_COMPLIANT_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_FULLY_COMPLIANT_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_FULLY_COMPLIANT_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="assign_FULLY_COMPLIANT_output">
+          <text>"FULLY_COMPLIANT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="assign_LATE_PASS">
+        <description>All submitted but some late, still passing - Student has submitted all assignments (none missing) but at least one was submitted after the deadline. Grade is still passing despite late penalties. Requires penalty was applied.</description>
+        <inputEntry id="assign_LATE_PASS_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="assign_LATE_PASS_input_2">
+          <text>&lt;= 3</text>
+        </inputEntry>
+        <inputEntry id="assign_LATE_PASS_input_3">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="assign_LATE_PASS_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_LATE_PASS_input_5">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="assign_LATE_PASS_input_6">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="assign_LATE_PASS_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_LATE_PASS_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_LATE_PASS_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="assign_LATE_PASS_output">
+          <text>"LATE_PASS"</text>
+        </outputEntry>
+      </rule>
+      <rule id="assign_INCOMPLETE_RESUBMITTING">
+        <description>Incomplete — actively resubmitting with multiple attempts - Student has missing assignments but is still actively working (multiple attempt numbers recorded, recent modifications). Not yet at academic risk but needs monitoring.</description>
+        <inputEntry id="assign_INCOMPLETE_RESUBMITTING_input_1">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="assign_INCOMPLETE_RESUBMITTING_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_INCOMPLETE_RESUBMITTING_input_3">
+          <text>&lt; 60</text>
+        </inputEntry>
+        <inputEntry id="assign_INCOMPLETE_RESUBMITTING_input_4">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="assign_INCOMPLETE_RESUBMITTING_input_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="assign_INCOMPLETE_RESUBMITTING_input_6">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="assign_INCOMPLETE_RESUBMITTING_input_7">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="assign_INCOMPLETE_RESUBMITTING_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_INCOMPLETE_RESUBMITTING_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="assign_INCOMPLETE_RESUBMITTING_output">
+          <text>"INCOMPLETE_RESUBMITTING"</text>
+        </outputEntry>
+      </rule>
+      <rule id="assign_NON_SUBMISSION_RISK">
+        <description>Multiple missing submissions — academic risk - Two or more assignments not submitted, no late submissions recorded (student did not even attempt late), and average grade on submitted work is below pass mark. High risk of course failure.</description>
+        <inputEntry id="assign_NON_SUBMISSION_RISK_input_1">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="assign_NON_SUBMISSION_RISK_input_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="assign_NON_SUBMISSION_RISK_input_3">
+          <text>&lt; 50</text>
+        </inputEntry>
+        <inputEntry id="assign_NON_SUBMISSION_RISK_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_NON_SUBMISSION_RISK_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_NON_SUBMISSION_RISK_input_6">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="assign_NON_SUBMISSION_RISK_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_NON_SUBMISSION_RISK_input_8">
+          <text>&gt;= 21</text>
+        </inputEntry>
+        <inputEntry id="assign_NON_SUBMISSION_RISK_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="assign_NON_SUBMISSION_RISK_output">
+          <text>"NON_SUBMISSION_RISK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="assign_GRADE_OVERRIDE_REVIEW">
+        <description>Grade manually overridden — requires review - One or more assignment grades have been manually overridden by an instructor, which is unusual. Student has completed all assignments and achieved passing average, but overrides require audit.</description>
+        <inputEntry id="assign_GRADE_OVERRIDE_REVIEW_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="assign_GRADE_OVERRIDE_REVIEW_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_GRADE_OVERRIDE_REVIEW_input_3">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="assign_GRADE_OVERRIDE_REVIEW_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_GRADE_OVERRIDE_REVIEW_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_GRADE_OVERRIDE_REVIEW_input_6">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="assign_GRADE_OVERRIDE_REVIEW_input_7">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="assign_GRADE_OVERRIDE_REVIEW_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="assign_GRADE_OVERRIDE_REVIEW_input_9">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <outputEntry id="assign_GRADE_OVERRIDE_REVIEW_output">
+          <text>"GRADE_OVERRIDE_REVIEW"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT3_QuizPerformanceBand" name="DT3_QuizPerformanceBand">
+    <description>Decision table generated from JSON rules for DT3_QuizPerformanceBand.</description>
+    <decisionTable id="DT3_QuizPerformanceBand_table" hitPolicy="FIRST">
+      <input id="DT3_QuizPerformanceBand_input_1" label="avgQuizScore">
+        <inputExpression id="DT3_QuizPerformanceBand_inputExpr_1" typeRef="number">
+          <text>avgQuizScore</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_QuizPerformanceBand_input_2" label="quizPassCount">
+        <inputExpression id="DT3_QuizPerformanceBand_inputExpr_2" typeRef="number">
+          <text>quizPassCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_QuizPerformanceBand_input_3" label="quizAttemptCount">
+        <inputExpression id="DT3_QuizPerformanceBand_inputExpr_3" typeRef="number">
+          <text>quizAttemptCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_QuizPerformanceBand_input_4" label="quizMaxAllowed">
+        <inputExpression id="DT3_QuizPerformanceBand_inputExpr_4" typeRef="number">
+          <text>quizMaxAllowed</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_QuizPerformanceBand_input_5" label="daysSinceEnrolment">
+        <inputExpression id="DT3_QuizPerformanceBand_inputExpr_5" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT3_QuizPerformanceBand_input_6" label="moduleCompletionCount">
+        <inputExpression id="DT3_QuizPerformanceBand_inputExpr_6" typeRef="number">
+          <text>moduleCompletionCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT3_QuizPerformanceBand_output" label="quizBand" name="quizBand" typeRef="string"/>
+      <rule id="quiz_MASTERY">
+        <description>Quiz mastery — high scores with few attempts - Student demonstrates mastery: high average score, all quiz attempts passed, well below maximum allowed attempts. Indicates strong conceptual understanding without needing retries.</description>
+        <inputEntry id="quiz_MASTERY_input_1">
+          <text>&gt;= 75</text>
+        </inputEntry>
+        <inputEntry id="quiz_MASTERY_input_2">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="quiz_MASTERY_input_3">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="quiz_MASTERY_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="quiz_MASTERY_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="quiz_MASTERY_input_6">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="quiz_MASTERY_output">
+          <text>"MASTERY"</text>
+        </outputEntry>
+      </rule>
+      <rule id="quiz_PASS_WITH_RETRIES">
+        <description>Passed quizzes but required multiple attempts - Student eventually passed quizzes but exhausted or nearly exhausted allowed attempts. Passed count equals attempt count (every attempt eventually passed) but attempt count is high.</description>
+        <inputEntry id="quiz_PASS_WITH_RETRIES_input_1">
+          <text>&lt; 75</text>
+        </inputEntry>
+        <inputEntry id="quiz_PASS_WITH_RETRIES_input_2">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="quiz_PASS_WITH_RETRIES_input_3">
+          <text>&lt;= quizMaxAllowed</text>
+        </inputEntry>
+        <inputEntry id="quiz_PASS_WITH_RETRIES_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="quiz_PASS_WITH_RETRIES_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="quiz_PASS_WITH_RETRIES_input_6">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="quiz_PASS_WITH_RETRIES_output">
+          <text>"PASS_WITH_RETRIES"</text>
+        </outputEntry>
+      </rule>
+      <rule id="quiz_ATTEMPTS_EXHAUSTED_FAIL">
+        <description>All attempts used — never reached pass mark - Student has used all allowed quiz attempts (quizAttemptCount &gt;= quizMaxAllowed) but quiz pass count is zero or low. Average score well below passing. Requires remediation.</description>
+        <inputEntry id="quiz_ATTEMPTS_EXHAUSTED_FAIL_input_1">
+          <text>&lt; 50</text>
+        </inputEntry>
+        <inputEntry id="quiz_ATTEMPTS_EXHAUSTED_FAIL_input_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="quiz_ATTEMPTS_EXHAUSTED_FAIL_input_3">
+          <text>&gt;= quizMaxAllowed</text>
+        </inputEntry>
+        <inputEntry id="quiz_ATTEMPTS_EXHAUSTED_FAIL_input_4">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="quiz_ATTEMPTS_EXHAUSTED_FAIL_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="quiz_ATTEMPTS_EXHAUSTED_FAIL_input_6">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="quiz_ATTEMPTS_EXHAUSTED_FAIL_output">
+          <text>"ATTEMPTS_EXHAUSTED_FAIL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="quiz_SINGLE_ATTEMPT_FAIL">
+        <description>Only one attempt made, below pass mark - Student attempted quizzes only once and failed to meet pass mark. Multiple attempts are still available. May indicate disengagement or confidence issue rather than inability.</description>
+        <inputEntry id="quiz_SINGLE_ATTEMPT_FAIL_input_1">
+          <text>&lt; 50</text>
+        </inputEntry>
+        <inputEntry id="quiz_SINGLE_ATTEMPT_FAIL_input_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="quiz_SINGLE_ATTEMPT_FAIL_input_3">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="quiz_SINGLE_ATTEMPT_FAIL_input_4">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="quiz_SINGLE_ATTEMPT_FAIL_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="quiz_SINGLE_ATTEMPT_FAIL_input_6">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="quiz_SINGLE_ATTEMPT_FAIL_output">
+          <text>"SINGLE_ATTEMPT_FAIL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="quiz_NOT_ATTEMPTED">
+        <description>No quiz attempts recorded - Student is enrolled, has been active long enough, but has not attempted any quizzes. Course has quizzes available (quizMaxAllowed &gt; 0). Engagement concern.</description>
+        <inputEntry id="quiz_NOT_ATTEMPTED_input_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="quiz_NOT_ATTEMPTED_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="quiz_NOT_ATTEMPTED_input_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="quiz_NOT_ATTEMPTED_input_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="quiz_NOT_ATTEMPTED_input_5">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="quiz_NOT_ATTEMPTED_input_6">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <outputEntry id="quiz_NOT_ATTEMPTED_output">
+          <text>"NOT_ATTEMPTED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT4_CourseCompletionStatus" name="DT4_CourseCompletionStatus">
+    <description>Decision table generated from JSON rules for DT4_CourseCompletionStatus.</description>
+    <decisionTable id="DT4_CourseCompletionStatus_table" hitPolicy="FIRST">
+      <input id="DT4_CourseCompletionStatus_input_1" label="finalGrade">
+        <inputExpression id="DT4_CourseCompletionStatus_inputExpr_1" typeRef="number">
+          <text>finalGrade</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_CourseCompletionStatus_input_2" label="moduleCompletionPct">
+        <inputExpression id="DT4_CourseCompletionStatus_inputExpr_2" typeRef="number">
+          <text>moduleCompletionPct</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_CourseCompletionStatus_input_3" label="unsubmittedCount">
+        <inputExpression id="DT4_CourseCompletionStatus_inputExpr_3" typeRef="number">
+          <text>unsubmittedCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_CourseCompletionStatus_input_4" label="timecompleted">
+        <inputExpression id="DT4_CourseCompletionStatus_inputExpr_4" typeRef="number">
+          <text>timecompleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_CourseCompletionStatus_input_5" label="failedItemCount">
+        <inputExpression id="DT4_CourseCompletionStatus_inputExpr_5" typeRef="number">
+          <text>failedItemCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_CourseCompletionStatus_input_6" label="quizPassCount">
+        <inputExpression id="DT4_CourseCompletionStatus_inputExpr_6" typeRef="number">
+          <text>quizPassCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_CourseCompletionStatus_input_7" label="daysSinceEnrolment">
+        <inputExpression id="DT4_CourseCompletionStatus_inputExpr_7" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_CourseCompletionStatus_input_8" label="daysUntilEnrolExpiry">
+        <inputExpression id="DT4_CourseCompletionStatus_inputExpr_8" typeRef="number">
+          <text>daysUntilEnrolExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT4_CourseCompletionStatus_input_9" label="forumPostCount">
+        <inputExpression id="DT4_CourseCompletionStatus_inputExpr_9" typeRef="number">
+          <text>forumPostCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT4_CourseCompletionStatus_output" label="completionStatus" name="completionStatus" typeRef="string"/>
+      <rule id="completion_AWARDED">
+        <description>Course completion awarded - Student meets all completion requirements: passing final grade, all required modules completed, all assignments submitted, course completion record written. Certificate can be issued.</description>
+        <inputEntry id="completion_AWARDED_input_1">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="completion_AWARDED_input_2">
+          <text>&gt;= 90</text>
+        </inputEntry>
+        <inputEntry id="completion_AWARDED_input_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="completion_AWARDED_input_4">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="completion_AWARDED_input_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="completion_AWARDED_input_6">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="completion_AWARDED_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_AWARDED_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_AWARDED_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="completion_AWARDED_output">
+          <text>"AWARDED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="completion_ELIGIBLE_PENDING">
+        <description>Met grade requirements but completion not yet recorded - Student has achieved passing grade and high module completion, but the mdl_course_completions.timecompleted has not yet been written (reaggregate may be pending). System should trigger reaggregation.</description>
+        <inputEntry id="completion_ELIGIBLE_PENDING_input_1">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="completion_ELIGIBLE_PENDING_input_2">
+          <text>&gt;= 85</text>
+        </inputEntry>
+        <inputEntry id="completion_ELIGIBLE_PENDING_input_3">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="completion_ELIGIBLE_PENDING_input_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="completion_ELIGIBLE_PENDING_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_ELIGIBLE_PENDING_input_6">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="completion_ELIGIBLE_PENDING_input_7">
+          <text>&gt;= 30</text>
+        </inputEntry>
+        <inputEntry id="completion_ELIGIBLE_PENDING_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_ELIGIBLE_PENDING_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="completion_ELIGIBLE_PENDING_output">
+          <text>"ELIGIBLE_PENDING"</text>
+        </outputEntry>
+      </rule>
+      <rule id="completion_IN_PROGRESS_ON_TRACK">
+        <description>In progress and on track for completion - Student is actively progressing: significant module completion, passing grade trajectory, assignments being submitted, and within enrolment window. No intervention needed.</description>
+        <inputEntry id="completion_IN_PROGRESS_ON_TRACK_input_1">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="completion_IN_PROGRESS_ON_TRACK_input_2">
+          <text>&lt; 90</text>
+        </inputEntry>
+        <inputEntry id="completion_IN_PROGRESS_ON_TRACK_input_3">
+          <text>&lt;= 1</text>
+        </inputEntry>
+        <inputEntry id="completion_IN_PROGRESS_ON_TRACK_input_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="completion_IN_PROGRESS_ON_TRACK_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_IN_PROGRESS_ON_TRACK_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_IN_PROGRESS_ON_TRACK_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_IN_PROGRESS_ON_TRACK_input_8">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="completion_IN_PROGRESS_ON_TRACK_input_9">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <outputEntry id="completion_IN_PROGRESS_ON_TRACK_output">
+          <text>"IN_PROGRESS_ON_TRACK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="completion_AT_RISK_LOW_ACTIVITY">
+        <description>At risk — insufficient activity for completion - Enrolment has been active for some time but module completion is very low, no forum engagement, and grade is below passing. Intervention required to prevent dropout.</description>
+        <inputEntry id="completion_AT_RISK_LOW_ACTIVITY_input_1">
+          <text>&lt; gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="completion_AT_RISK_LOW_ACTIVITY_input_2">
+          <text>&lt; 40</text>
+        </inputEntry>
+        <inputEntry id="completion_AT_RISK_LOW_ACTIVITY_input_3">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="completion_AT_RISK_LOW_ACTIVITY_input_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="completion_AT_RISK_LOW_ACTIVITY_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_AT_RISK_LOW_ACTIVITY_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_AT_RISK_LOW_ACTIVITY_input_7">
+          <text>&gt;= 21</text>
+        </inputEntry>
+        <inputEntry id="completion_AT_RISK_LOW_ACTIVITY_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_AT_RISK_LOW_ACTIVITY_input_9">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="completion_AT_RISK_LOW_ACTIVITY_output">
+          <text>"AT_RISK_LOW_ACTIVITY"</text>
+        </outputEntry>
+      </rule>
+      <rule id="completion_FAILED_GRADE">
+        <description>Course failed — grade below pass mark at end of period - Enrolment period has ended or near end, final grade is below pass mark, and completion was never recorded. Student has failed the course for this enrolment period.</description>
+        <inputEntry id="completion_FAILED_GRADE_input_1">
+          <text>&lt; gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="completion_FAILED_GRADE_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_FAILED_GRADE_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_FAILED_GRADE_input_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="completion_FAILED_GRADE_input_5">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="completion_FAILED_GRADE_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="completion_FAILED_GRADE_input_7">
+          <text>&gt;= 60</text>
+        </inputEntry>
+        <inputEntry id="completion_FAILED_GRADE_input_8">
+          <text>&lt; 7</text>
+        </inputEntry>
+        <inputEntry id="completion_FAILED_GRADE_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="completion_FAILED_GRADE_output">
+          <text>"FAILED_GRADE"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT5_AcademicStanding" name="DT5_AcademicStanding">
+    <description>Decision table generated from JSON rules for DT5_AcademicStanding.</description>
+    <decisionTable id="DT5_AcademicStanding_table" hitPolicy="FIRST">
+      <input id="DT5_AcademicStanding_input_1" label="finalGrade">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_1" typeRef="number">
+          <text>finalGrade</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_2" label="failedItemCount">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_2" typeRef="number">
+          <text>failedItemCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_3" label="moduleCompletionPct">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_3" typeRef="number">
+          <text>moduleCompletionPct</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_4" label="unsubmittedCount">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_4" typeRef="number">
+          <text>unsubmittedCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_5" label="forumPostCount">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_5" typeRef="number">
+          <text>forumPostCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_6" label="daysSinceLastPost">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_6" typeRef="number">
+          <text>daysSinceLastPost</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_7" label="assignPenaltyActive">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_7" typeRef="number">
+          <text>assignPenaltyActive</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_8" label="daysSinceEnrolment">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_8" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_9" label="quizAttemptCount">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_9" typeRef="number">
+          <text>quizAttemptCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_10" label="overriddenGradeCount">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_10" typeRef="number">
+          <text>overriddenGradeCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_11" label="avgQuizScore">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_11" typeRef="number">
+          <text>avgQuizScore</text>
+        </inputExpression>
+      </input>
+      <input id="DT5_AcademicStanding_input_12" label="totalAssignments">
+        <inputExpression id="DT5_AcademicStanding_inputExpr_12" typeRef="number">
+          <text>totalAssignments</text>
+        </inputExpression>
+      </input>
+      <output id="DT5_AcademicStanding_output" label="academicStanding" name="academicStanding" typeRef="string"/>
+      <rule id="standing_GOOD">
+        <description>Good academic standing - Student is in good standing: passing final grade, no failed grade items, adequate module completion, assignment compliance, and active engagement (recent forum activity). Eligible for all privileges.</description>
+        <inputEntry id="standing_GOOD_input_1">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_2">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_3">
+          <text>&gt;= 70</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_5">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_6">
+          <text>&lt;= 14</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_7">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_GOOD_input_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="standing_GOOD_output">
+          <text>"GOOD"</text>
+        </outputEntry>
+      </rule>
+      <rule id="standing_SATISFACTORY">
+        <description>Satisfactory standing — passing but with concerns - Student is passing overall but has some deficiencies: one or two failed grade items, or low engagement, or late submissions. Passes the threshold but advisor flag is set.</description>
+        <inputEntry id="standing_SATISFACTORY_input_1">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_2">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_3">
+          <text>&gt;= 55</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_4">
+          <text>&lt;= 1</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_8">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SATISFACTORY_input_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="standing_SATISFACTORY_output">
+          <text>"SATISFACTORY"</text>
+        </outputEntry>
+      </rule>
+      <rule id="standing_PROBATION">
+        <description>Academic probation — below pass threshold - Final grade is below pass mark but student is still engaged (some module completions, some forum activity). Placed on academic probation with remediation plan required.</description>
+        <inputEntry id="standing_PROBATION_input_1">
+          <text>&lt; gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_2">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_3">
+          <text>&gt;= 35</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_5">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_8">
+          <text>&gt;= 28</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_9">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_PROBATION_input_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="standing_PROBATION_output">
+          <text>"PROBATION"</text>
+        </outputEntry>
+      </rule>
+      <rule id="standing_SUSPENSION_RISK">
+        <description>Suspension risk — failing with disengagement - Student is failing academically and showing signs of disengagement: below pass grade, multiple failed items, low module completion, no forum posts, multiple missing assignments. At risk of suspension.</description>
+        <inputEntry id="standing_SUSPENSION_RISK_input_1">
+          <text>&lt; gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_2">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_3">
+          <text>&lt; 35</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_4">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_8">
+          <text>&gt;= 30</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_SUSPENSION_RISK_input_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="standing_SUSPENSION_RISK_output">
+          <text>"SUSPENSION_RISK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="standing_INTEGRITY_HOLD">
+        <description>Academic integrity hold — investigation pending - Student has grade overrides on multiple items AND high performance inconsistency (high avg quiz score but failed grade items). Pattern may indicate integrity concern. Standing frozen pending review.</description>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_2">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_8">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_10">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_11">
+          <text>&gt;= 70</text>
+        </inputEntry>
+        <inputEntry id="standing_INTEGRITY_HOLD_input_12">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <outputEntry id="standing_INTEGRITY_HOLD_output">
+          <text>"INTEGRITY_HOLD"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT6_InstructorWorkload" name="DT6_InstructorWorkload">
+    <description>Decision table generated from JSON rules for DT6_InstructorWorkload.</description>
+    <decisionTable id="DT6_InstructorWorkload_table" hitPolicy="FIRST">
+      <input id="DT6_InstructorWorkload_input_1" label="ungradedSubmissionCount">
+        <inputExpression id="DT6_InstructorWorkload_inputExpr_1" typeRef="number">
+          <text>ungradedSubmissionCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_InstructorWorkload_input_2" label="maxDaysUngraded">
+        <inputExpression id="DT6_InstructorWorkload_inputExpr_2" typeRef="number">
+          <text>maxDaysUngraded</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_InstructorWorkload_input_3" label="totalAssignments">
+        <inputExpression id="DT6_InstructorWorkload_inputExpr_3" typeRef="number">
+          <text>totalAssignments</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_InstructorWorkload_input_4" label="enrolledStudentCount">
+        <inputExpression id="DT6_InstructorWorkload_inputExpr_4" typeRef="number">
+          <text>enrolledStudentCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_InstructorWorkload_input_5" label="assignPenaltyActive">
+        <inputExpression id="DT6_InstructorWorkload_inputExpr_5" typeRef="number">
+          <text>assignPenaltyActive</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_InstructorWorkload_input_6" label="missingFeedbackCount">
+        <inputExpression id="DT6_InstructorWorkload_inputExpr_6" typeRef="number">
+          <text>missingFeedbackCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_InstructorWorkload_input_7" label="unansweredDiscussionCount">
+        <inputExpression id="DT6_InstructorWorkload_inputExpr_7" typeRef="number">
+          <text>unansweredDiscussionCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_InstructorWorkload_input_8" label="daysSinceLastInstructorPost">
+        <inputExpression id="DT6_InstructorWorkload_inputExpr_8" typeRef="number">
+          <text>daysSinceLastInstructorPost</text>
+        </inputExpression>
+      </input>
+      <input id="DT6_InstructorWorkload_input_9" label="totalForumDiscussions">
+        <inputExpression id="DT6_InstructorWorkload_inputExpr_9" typeRef="number">
+          <text>totalForumDiscussions</text>
+        </inputExpression>
+      </input>
+      <output id="DT6_InstructorWorkload_output" label="workloadStatus" name="workloadStatus" typeRef="string"/>
+      <rule id="workload_CRITICAL_BACKLOG">
+        <description>Critical grading backlog — immediate action required - Instructor has a critical number of ungraded assignment submissions that are overdue for feedback. Many students submitted but grades not yet entered. Student satisfaction and progression are blocked.</description>
+        <inputEntry id="workload_CRITICAL_BACKLOG_input_1">
+          <text>&gt;= 10</text>
+        </inputEntry>
+        <inputEntry id="workload_CRITICAL_BACKLOG_input_2">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="workload_CRITICAL_BACKLOG_input_3">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="workload_CRITICAL_BACKLOG_input_4">
+          <text>&gt;= 20</text>
+        </inputEntry>
+        <inputEntry id="workload_CRITICAL_BACKLOG_input_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="workload_CRITICAL_BACKLOG_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_CRITICAL_BACKLOG_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_CRITICAL_BACKLOG_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_CRITICAL_BACKLOG_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="workload_CRITICAL_BACKLOG_output">
+          <text>"CRITICAL_BACKLOG"</text>
+        </outputEntry>
+      </rule>
+      <rule id="workload_HIGH_GRADING">
+        <description>High workload — substantial grading queue - Instructor has a substantial grading queue but within manageable timeframes. Some submissions awaiting grades but none severely overdue. Normal heavy period monitoring.</description>
+        <inputEntry id="workload_HIGH_GRADING_input_1">
+          <text>&lt; 10</text>
+        </inputEntry>
+        <inputEntry id="workload_HIGH_GRADING_input_2">
+          <text>&lt; 14</text>
+        </inputEntry>
+        <inputEntry id="workload_HIGH_GRADING_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_HIGH_GRADING_input_4">
+          <text>&gt;= 15</text>
+        </inputEntry>
+        <inputEntry id="workload_HIGH_GRADING_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_HIGH_GRADING_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_HIGH_GRADING_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_HIGH_GRADING_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_HIGH_GRADING_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="workload_HIGH_GRADING_output">
+          <text>"HIGH_GRADING"</text>
+        </outputEntry>
+      </rule>
+      <rule id="workload_FEEDBACK_PENDING">
+        <description>Feedback pending — grades entered but no comments - Grades have been entered but instructor has not yet provided written feedback on several submissions. Students are waiting on qualitative feedback for improvement.</description>
+        <inputEntry id="workload_FEEDBACK_PENDING_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="workload_FEEDBACK_PENDING_input_2">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="workload_FEEDBACK_PENDING_input_3">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="workload_FEEDBACK_PENDING_input_4">
+          <text>&gt;= 10</text>
+        </inputEntry>
+        <inputEntry id="workload_FEEDBACK_PENDING_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_FEEDBACK_PENDING_input_6">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="workload_FEEDBACK_PENDING_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_FEEDBACK_PENDING_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_FEEDBACK_PENDING_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="workload_FEEDBACK_PENDING_output">
+          <text>"FEEDBACK_PENDING"</text>
+        </outputEntry>
+      </rule>
+      <rule id="workload_NORMAL">
+        <description>Normal workload — marking up to date - Instructor is keeping up with grading obligations: few or no ungraded submissions, feedback provided promptly, and enrolled student count is manageable.</description>
+        <inputEntry id="workload_NORMAL_input_1">
+          <text>&lt;= 3</text>
+        </inputEntry>
+        <inputEntry id="workload_NORMAL_input_2">
+          <text>&lt;= 5</text>
+        </inputEntry>
+        <inputEntry id="workload_NORMAL_input_3">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="workload_NORMAL_input_4">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="workload_NORMAL_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_NORMAL_input_6">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="workload_NORMAL_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_NORMAL_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_NORMAL_input_9">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="workload_NORMAL_output">
+          <text>"NORMAL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="workload_FORUM_UNRESPONSIVE">
+        <description>Forum unresponsive — unanswered student discussions overdue - Instructor has a significant number of student-initiated forum discussions with no instructor reply, some of which have been waiting beyond the institutional response SLA. Grading may be current but forum obligations are unmet. Requires: unanswered discussion count, days since last instructor post, enrolled student count, and total forum discussions to ensure the course is active.</description>
+        <inputEntry id="workload_FORUM_UNRESPONSIVE_input_1">
+          <text>&lt;= 3</text>
+        </inputEntry>
+        <inputEntry id="workload_FORUM_UNRESPONSIVE_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_FORUM_UNRESPONSIVE_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_FORUM_UNRESPONSIVE_input_4">
+          <text>&gt;= 10</text>
+        </inputEntry>
+        <inputEntry id="workload_FORUM_UNRESPONSIVE_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_FORUM_UNRESPONSIVE_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="workload_FORUM_UNRESPONSIVE_input_7">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="workload_FORUM_UNRESPONSIVE_input_8">
+          <text>&gt;= 7</text>
+        </inputEntry>
+        <inputEntry id="workload_FORUM_UNRESPONSIVE_input_9">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <outputEntry id="workload_FORUM_UNRESPONSIVE_output">
+          <text>"FORUM_UNRESPONSIVE"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT7_FraudRiskFlag" name="DT7_FraudRiskFlag">
+    <description>Decision table generated from JSON rules for DT7_FraudRiskFlag.</description>
+    <decisionTable id="DT7_FraudRiskFlag_table" hitPolicy="FIRST">
+      <input id="DT7_FraudRiskFlag_input_1" label="overriddenGradeCount">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_1" typeRef="number">
+          <text>overriddenGradeCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_2" label="avgQuizScore">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_2" typeRef="number">
+          <text>avgQuizScore</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_3" label="finalGrade">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_3" typeRef="number">
+          <text>finalGrade</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_4" label="totalAssignments">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_4" typeRef="number">
+          <text>totalAssignments</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_5" label="daysSinceEnrolment">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_5" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_6" label="unsubmittedCount">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_6" typeRef="number">
+          <text>unsubmittedCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_7" label="moduleCompletionPct">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_7" typeRef="number">
+          <text>moduleCompletionPct</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_8" label="moduleCompletionCount">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_8" typeRef="number">
+          <text>moduleCompletionCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_9" label="quizAttemptCount">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_9" typeRef="number">
+          <text>quizAttemptCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_10" label="forumPostCount">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_10" typeRef="number">
+          <text>forumPostCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_11" label="lessonGrade">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_11" typeRef="number">
+          <text>lessonGrade</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_12" label="avgAssignGrade">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_12" typeRef="number">
+          <text>avgAssignGrade</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_13" label="assignPenaltyActive">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_13" typeRef="number">
+          <text>assignPenaltyActive</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_14" label="maxAttemptNumber">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_14" typeRef="number">
+          <text>maxAttemptNumber</text>
+        </inputExpression>
+      </input>
+      <input id="DT7_FraudRiskFlag_input_15" label="submittedLate">
+        <inputExpression id="DT7_FraudRiskFlag_inputExpr_15" typeRef="number">
+          <text>submittedLate</text>
+        </inputExpression>
+      </input>
+      <output id="DT7_FraudRiskFlag_output" label="fraudRisk" name="fraudRisk" typeRef="string"/>
+      <rule id="fraud_HIGH_RISK_OVERRIDE_PATTERN">
+        <description>High fraud risk — suspicious grade override pattern - Multiple grade overrides combined with sudden performance jump (low quiz scores but high final grade after override). Pattern strongly suggests grade manipulation investigation is warranted.</description>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_1">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_2">
+          <text>&lt; 45</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_3">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_4">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_5">
+          <text>&gt;= 21</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_6">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_13">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_14">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_input_15">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="fraud_HIGH_RISK_OVERRIDE_PATTERN_output">
+          <text>"HIGH_RISK_OVERRIDE_PATTERN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="fraud_MEDIUM_RISK_RAPID_COMPLETION">
+        <description>Medium fraud risk — implausibly rapid course completion - Student completed a high percentage of course modules in very few days since enrolment, which is implausible for the volume of material. Rapid-click-through behaviour.</description>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_4">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_5">
+          <text>&lt;= 3</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_7">
+          <text>&gt;= 80</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_8">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_9">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_13">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_14">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_input_15">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="fraud_MEDIUM_RISK_RAPID_COMPLETION_output">
+          <text>"MEDIUM_RISK_RAPID_COMPLETION"</text>
+        </outputEntry>
+      </rule>
+      <rule id="fraud_MEDIUM_RISK_IDENTITY">
+        <description>Medium fraud risk — inconsistent activity timing - Student shows high performance in timed activities (quizzes) but zero forum engagement and no lesson activity, which is inconsistent with genuine learning. Possible account sharing.</description>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_2">
+          <text>&gt;= 80</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_5">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_7">
+          <text>&gt;= 60</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_9">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_10">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_11">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_13">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_14">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_MEDIUM_RISK_IDENTITY_input_15">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="fraud_MEDIUM_RISK_IDENTITY_output">
+          <text>"MEDIUM_RISK_IDENTITY"</text>
+        </outputEntry>
+      </rule>
+      <rule id="fraud_LOW_RISK_NORMAL">
+        <description>Low fraud risk — consistent activity pattern - Student shows balanced activity across all learning modalities: quizzes, assignments, forum, lessons. Performance is consistent with effort level. No anomalous patterns detected.</description>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_7">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_9">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_10">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_11">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_12">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_13">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_14">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_LOW_RISK_NORMAL_input_15">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="fraud_LOW_RISK_NORMAL_output">
+          <text>"LOW_RISK_NORMAL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="fraud_PLAGIARISM_RESUBMIT">
+        <description>Plagiarism flag — excessive resubmission after penalty - Student has multiple active late penalties AND has resubmitted assignments many times. Combined with below-pass grade, this pattern may indicate resubmitting plagiarised work with minor edits.</description>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_4">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_12">
+          <text>&lt; 50</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_13">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_14">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="fraud_PLAGIARISM_RESUBMIT_input_15">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <outputEntry id="fraud_PLAGIARISM_RESUBMIT_output">
+          <text>"PLAGIARISM_RESUBMIT"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT8_ReEnrolmentEligibility" name="DT8_ReEnrolmentEligibility">
+    <description>Decision table generated from JSON rules for DT8_ReEnrolmentEligibility.</description>
+    <decisionTable id="DT8_ReEnrolmentEligibility_table" hitPolicy="FIRST">
+      <input id="DT8_ReEnrolmentEligibility_input_1" label="timecompleted">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_1" typeRef="number">
+          <text>timecompleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_2" label="finalGrade">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_2" typeRef="number">
+          <text>finalGrade</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_3" label="moduleCompletionPct">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_3" typeRef="number">
+          <text>moduleCompletionPct</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_4" label="unsubmittedCount">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_4" typeRef="number">
+          <text>unsubmittedCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_5" label="badgeCount">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_5" typeRef="number">
+          <text>badgeCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_6" label="competencyProficient">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_6" typeRef="number">
+          <text>competencyProficient</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_7" label="assignPenaltyActive">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_7" typeRef="number">
+          <text>assignPenaltyActive</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_8" label="failedItemCount">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_8" typeRef="number">
+          <text>failedItemCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_9" label="daysSinceEnrolment">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_9" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_10" label="daysUntilEnrolExpiry">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_10" typeRef="number">
+          <text>daysUntilEnrolExpiry</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_11" label="quizAttemptCount">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_11" typeRef="number">
+          <text>quizAttemptCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_12" label="overriddenGradeCount">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_12" typeRef="number">
+          <text>overriddenGradeCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_13" label="totalAssignments">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_13" typeRef="number">
+          <text>totalAssignments</text>
+        </inputExpression>
+      </input>
+      <input id="DT8_ReEnrolmentEligibility_input_14" label="forumPostCount">
+        <inputExpression id="DT8_ReEnrolmentEligibility_inputExpr_14" typeRef="number">
+          <text>forumPostCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT8_ReEnrolmentEligibility_output" label="reEnrolStatus" name="reEnrolStatus" typeRef="string"/>
+      <rule id="reenrol_ELIGIBLE_STRONG">
+        <description>Strongly eligible for re-enrolment - Student completed the course successfully with passing grade, high module completion, and good assignment record. Has badges and competency proficiency. Fast-track re-enrolment for advanced course.</description>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_2">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_3">
+          <text>&gt;= 85</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_5">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_6">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_7">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_13">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_STRONG_input_14">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="reenrol_ELIGIBLE_STRONG_output">
+          <text>"ELIGIBLE_STRONG"</text>
+        </outputEntry>
+      </rule>
+      <rule id="reenrol_ELIGIBLE_CONDITIONAL">
+        <description>Conditionally eligible — passed but with gaps - Student passed the course but has some deficiencies: missed some modules, had late submissions, or failed some grade items. Re-enrolment allowed with conditions (remedial work required).</description>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_2">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_3">
+          <text>&lt; 85</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_4">
+          <text>&lt;= 1</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_8">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_9">
+          <text>&gt;= 30</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_13">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_ELIGIBLE_CONDITIONAL_input_14">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="reenrol_ELIGIBLE_CONDITIONAL_output">
+          <text>"ELIGIBLE_CONDITIONAL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="reenrol_DEFERRED_INCOMPLETE">
+        <description>Re-enrolment deferred — course not completed - Student did not complete the course (no completion timestamp) but has partial progress. Must formally apply for deferral/re-enrolment and demonstrate commitment via existing work.</description>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_2">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_3">
+          <text>&lt; 80</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_10">
+          <text>&lt; 0</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_11">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_13">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_DEFERRED_INCOMPLETE_input_14">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="reenrol_DEFERRED_INCOMPLETE_output">
+          <text>"DEFERRED_INCOMPLETE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="reenrol_BLOCKED_INTEGRITY">
+        <description>Re-enrolment blocked — academic integrity hold - Student cannot re-enrol because they have grade overrides under review AND failed the course. Integrity investigation must be resolved before any re-enrolment is considered.</description>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_2">
+          <text>&lt; gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_9">
+          <text>&gt;= 21</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_12">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_13">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_INTEGRITY_input_14">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="reenrol_BLOCKED_INTEGRITY_output">
+          <text>"BLOCKED_INTEGRITY"</text>
+        </outputEntry>
+      </rule>
+      <rule id="reenrol_BLOCKED_NON_ENGAGEMENT">
+        <description>Re-enrolment blocked — chronic non-engagement - Student failed the course with almost no engagement: minimal module completion, no forum posts, no quiz attempts, and multiple missing assignments. Re-enrolment requires adviser interview first.</description>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_2">
+          <text>&lt; gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_3">
+          <text>&lt; 25</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_4">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_9">
+          <text>&gt;= 30</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_11">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_12">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_13">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_input_14">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="reenrol_BLOCKED_NON_ENGAGEMENT_output">
+          <text>"BLOCKED_NON_ENGAGEMENT"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT9_BadgeAwardEligibility" name="DT9_BadgeAwardEligibility">
+    <description>Decision table generated from JSON rules for DT9_BadgeAwardEligibility.</description>
+    <decisionTable id="DT9_BadgeAwardEligibility_table" hitPolicy="FIRST">
+      <input id="DT9_BadgeAwardEligibility_input_1" label="timecompleted">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_1" typeRef="number">
+          <text>timecompleted</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_2" label="finalGrade">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_2" typeRef="number">
+          <text>finalGrade</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_3" label="avgQuizScore">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_3" typeRef="number">
+          <text>avgQuizScore</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_4" label="unsubmittedCount">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_4" typeRef="number">
+          <text>unsubmittedCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_5" label="moduleCompletionPct">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_5" typeRef="number">
+          <text>moduleCompletionPct</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_6" label="forumPostCount">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_6" typeRef="number">
+          <text>forumPostCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_7" label="assignPenaltyActive">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_7" typeRef="number">
+          <text>assignPenaltyActive</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_8" label="quizPassCount">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_8" typeRef="number">
+          <text>quizPassCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_9" label="quizAttemptCount">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_9" typeRef="number">
+          <text>quizAttemptCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_10" label="submittedOnTime">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_10" typeRef="number">
+          <text>submittedOnTime</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_11" label="daysSinceEnrolment">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_11" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT9_BadgeAwardEligibility_input_12" label="overriddenGradeCount">
+        <inputExpression id="DT9_BadgeAwardEligibility_inputExpr_12" typeRef="number">
+          <text>overriddenGradeCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT9_BadgeAwardEligibility_output" label="badgeEligibility" name="badgeEligibility" typeRef="string"/>
+      <rule id="badge_DISTINCTION_AWARD">
+        <description>Distinction badge awarded for exceptional course achievement - Student has completed the course with a very high final grade, strong quiz performance, full assignment submission, and meaningful forum participation. Eligible for distinction-level badge.</description>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_2">
+          <text>&gt;= 85</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_3">
+          <text>&gt;= 80</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_5">
+          <text>&gt;= 95</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_6">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_7">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_DISTINCTION_AWARD_input_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="badge_DISTINCTION_AWARD_output">
+          <text>"DISTINCTION_AWARD"</text>
+        </outputEntry>
+      </rule>
+      <rule id="badge_COMPLETION_AWARD">
+        <description>Standard completion badge awarded - Student completed the course, met the pass mark, finished required modules, and has no missing assignments. Eligible for the normal course completion badge.</description>
+        <inputEntry id="badge_COMPLETION_AWARD_input_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_2">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_5">
+          <text>&gt;= 90</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_8">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_COMPLETION_AWARD_input_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="badge_COMPLETION_AWARD_output">
+          <text>"COMPLETION_AWARD"</text>
+        </outputEntry>
+      </rule>
+      <rule id="badge_PARTICIPATION_AWARD">
+        <description>Participation badge awarded for active engagement - Student is not necessarily fully complete yet but has sustained participation through forums, modules, quizzes, and assignments.</description>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_5">
+          <text>&gt;= 60</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_6">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_9">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_10">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_11">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="badge_PARTICIPATION_AWARD_input_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="badge_PARTICIPATION_AWARD_output">
+          <text>"PARTICIPATION_AWARD"</text>
+        </outputEntry>
+      </rule>
+      <rule id="badge_PENDING_REVIEW">
+        <description>Badge eligibility pending manual review - Student appears eligible by completion and grade, but grade overrides or integrity indicators require a manual review before issuing a badge.</description>
+        <inputEntry id="badge_PENDING_REVIEW_input_1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_2">
+          <text>&gt;= gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_4">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_5">
+          <text>&gt;= 85</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_PENDING_REVIEW_input_12">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <outputEntry id="badge_PENDING_REVIEW_output">
+          <text>"PENDING_REVIEW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="badge_NOT_ELIGIBLE">
+        <description>Badge not eligible - Student has not completed sufficient course requirements or has unresolved assignment, quiz, or grade issues. Badge should not be issued.</description>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_2">
+          <text>&lt; gradePassMark</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_4">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_5">
+          <text>&lt; 80</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_8">
+          <text>&lt; 1</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_10">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_11">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="badge_NOT_ELIGIBLE_input_12">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="badge_NOT_ELIGIBLE_output">
+          <text>"NOT_ELIGIBLE"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="DT10_ForumEngagementRisk" name="DT10_ForumEngagementRisk">
+    <description>Decision table generated from JSON rules for DT10_ForumEngagementRisk.</description>
+    <decisionTable id="DT10_ForumEngagementRisk_table" hitPolicy="FIRST">
+      <input id="DT10_ForumEngagementRisk_input_1" label="forumPostCount">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_1" typeRef="number">
+          <text>forumPostCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ForumEngagementRisk_input_2" label="daysSinceLastPost">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_2" typeRef="number">
+          <text>daysSinceLastPost</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ForumEngagementRisk_input_3" label="moduleCompletionPct">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_3" typeRef="number">
+          <text>moduleCompletionPct</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ForumEngagementRisk_input_4" label="daysSinceEnrolment">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_4" typeRef="number">
+          <text>daysSinceEnrolment</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ForumEngagementRisk_input_5" label="quizAttemptCount">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_5" typeRef="number">
+          <text>quizAttemptCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ForumEngagementRisk_input_6" label="unsubmittedCount">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_6" typeRef="number">
+          <text>unsubmittedCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ForumEngagementRisk_input_7" label="unansweredDiscussionCount">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_7" typeRef="number">
+          <text>unansweredDiscussionCount</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ForumEngagementRisk_input_8" label="daysSinceLastInstructorPost">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_8" typeRef="number">
+          <text>daysSinceLastInstructorPost</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ForumEngagementRisk_input_9" label="totalForumDiscussions">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_9" typeRef="number">
+          <text>totalForumDiscussions</text>
+        </inputExpression>
+      </input>
+      <input id="DT10_ForumEngagementRisk_input_10" label="enrolledStudentCount">
+        <inputExpression id="DT10_ForumEngagementRisk_inputExpr_10" typeRef="number">
+          <text>enrolledStudentCount</text>
+        </inputExpression>
+      </input>
+      <output id="DT10_ForumEngagementRisk_output" label="forumEngagement" name="forumEngagement" typeRef="string"/>
+      <rule id="forum_HIGH_ENGAGEMENT">
+        <description>High forum engagement - Student is highly engaged in course discussions, posting frequently and recently, with active module progress. Forum engagement supports learning progression.</description>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_1">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_2">
+          <text>&lt;= 7</text>
+        </inputEntry>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_3">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_4">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_HIGH_ENGAGEMENT_input_10">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="forum_HIGH_ENGAGEMENT_output">
+          <text>"HIGH_ENGAGEMENT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="forum_MODERATE_ENGAGEMENT">
+        <description>Moderate forum engagement - Student has some forum activity, but posting is not frequent or recent enough to be considered highly engaged.</description>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_1">
+          <text>&lt; 8</text>
+        </inputEntry>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_2">
+          <text>&lt;= 21</text>
+        </inputEntry>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_3">
+          <text>&gt;= 30</text>
+        </inputEntry>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_MODERATE_ENGAGEMENT_input_10">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="forum_MODERATE_ENGAGEMENT_output">
+          <text>"MODERATE_ENGAGEMENT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="forum_SILENT_ACTIVE">
+        <description>Silent but academically active - Student does not participate in forums but is still progressing through modules, quizzes, or assignments. Adviser may encourage social engagement but academic risk is lower.</description>
+        <inputEntry id="forum_SILENT_ACTIVE_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="forum_SILENT_ACTIVE_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_SILENT_ACTIVE_input_3">
+          <text>&gt;= 50</text>
+        </inputEntry>
+        <inputEntry id="forum_SILENT_ACTIVE_input_4">
+          <text>&gt;= 14</text>
+        </inputEntry>
+        <inputEntry id="forum_SILENT_ACTIVE_input_5">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="forum_SILENT_ACTIVE_input_6">
+          <text>&lt;= 1</text>
+        </inputEntry>
+        <inputEntry id="forum_SILENT_ACTIVE_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_SILENT_ACTIVE_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_SILENT_ACTIVE_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_SILENT_ACTIVE_input_10">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="forum_SILENT_ACTIVE_output">
+          <text>"SILENT_ACTIVE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="forum_DISENGAGED">
+        <description>Forum disengaged with low academic activity - Student has no forum participation and low progress across modules and quizzes. Indicates likely disengagement and need for outreach.</description>
+        <inputEntry id="forum_DISENGAGED_input_1">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="forum_DISENGAGED_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_DISENGAGED_input_3">
+          <text>&lt; 30</text>
+        </inputEntry>
+        <inputEntry id="forum_DISENGAGED_input_4">
+          <text>&gt;= 21</text>
+        </inputEntry>
+        <inputEntry id="forum_DISENGAGED_input_5">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="forum_DISENGAGED_input_6">
+          <text>&gt;= 1</text>
+        </inputEntry>
+        <inputEntry id="forum_DISENGAGED_input_7">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_DISENGAGED_input_8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_DISENGAGED_input_9">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_DISENGAGED_input_10">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="forum_DISENGAGED_output">
+          <text>"DISENGAGED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="forum_INSTRUCTOR_RESPONSE_NEEDED">
+        <description>Instructor forum response needed - Student or class discussion volume is high, unanswered discussions are accumulating, and instructor has not posted recently. Requires instructor response.</description>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_7">
+          <text>&gt;= 3</text>
+        </inputEntry>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_8">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_9">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <inputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_input_10">
+          <text>&gt;= 10</text>
+        </inputEntry>
+        <outputEntry id="forum_INSTRUCTOR_RESPONSE_NEEDED_output">
+          <text>"INSTRUCTOR_RESPONSE_NEEDED"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
