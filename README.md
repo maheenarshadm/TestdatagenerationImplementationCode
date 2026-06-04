@@ -50,9 +50,9 @@ The approach is evaluated on four data-intensive systems:
 
 | System | Type | Domain | Rules | Tables | Source |
 |--------|------|--------|-------|--------|--------|
-| Flex | Industrial (confidential) | Academic Management | 60 | 208 | Proprietary |
-| Moodle | Open-source | Learning Management | 50 | 484 | https://sourceforge.net/projects/moodle/files/Moodle/stable403/moodle-4.3.zip/download |
-| jBilling | Open-source | Billing & Subscription | 50 | 39 | https://sourceforge.net/projects/jbilling/ |
+| Flex | Industrial (confidential) | Academic Management | 60 | 208 | https://flex.nu.edu.pk |
+| Moodle | Open-source | Learning Management | 50 | 484 | https://sourceforge.net/projects/moodle/files/Moodle/stable403 |
+| jBilling | Open-source | Billing & Subscription | 50 | 39 | https://sourceforge.net/projects/jbilling|
 | openIMIS | Open-source | Health Insurance | 70 | 65 | https://github.com/openimis/database_ms_sqlserver |
 
 **Note on Flex:** Business rules and schema for Flex are not included in this 
