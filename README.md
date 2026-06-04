@@ -76,10 +76,9 @@ reviewed by at least two experts before use. Industry collaboration was
 provided by Questlab (https://www.questlab.pk).
 
 **Schema Files**
-Three schema files are provided ,The schema parser (`schema_parser.py`) 
+Three schema files are provided that are obtained from each subject system,The schema parser (`schema_parser.py`) 
 automatically handles dialect differences at runtime — no manual conversion 
-is required. See `SCHEMAS.md` for full details on each schema including 
-source, version, dialect, and table/column/foreign key counts.
+is required. 
 
 **SQL Output Files**
 Three `.sql` files containing the generated schema-valid INSERT statement 
